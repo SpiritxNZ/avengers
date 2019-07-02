@@ -1,0 +1,16 @@
+footer.main-footer {
+  bottom: 0;
+  width: 100%;
+  background: #2f333e;
+  color: #fff;
+  padding: 20px 10px;
+}
+
+footer.main-footer a {
+  color: inherit;
+}
+
+footer.main-footer p {
+  margin: 0;
+  font-size: 0.8em;
+}
