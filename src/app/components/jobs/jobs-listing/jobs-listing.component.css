@@ -1,5 +1,42 @@
-.jobs_list{
-    height:55rem;
-    overflow: scroll;
-    overflow-x: hidden;
+.card {
+  -webkit-box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.1), -1px 0 2px rgba(0, 0, 0, 0.05);
+  box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.1), -1px 0 2px rgba(0, 0, 0, 0.05);
+  border: 0 solid #eee;
+  border-radius: 0;
+}
+
+.card ul {  
+  overflow-x: hidden;
+    overflow-y: auto;
+}
+
+.job-item {
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+  display: flex;  
+}
+
+.card .company-icon img {
+  width: 3.5rem;
+  height: 3.5rem;
+}
+
+.company-content {
+  width: 100% !important; 
+  border-bottom: 1px solid #d0d0d0;
+}
+
+.company-content-brief {
+  padding-left:0.5rem;
+  float: left;
+}
+
+.favorite-day {
+  float: right;
+}
+
+p {
+  margin-bottom: 0;
 }

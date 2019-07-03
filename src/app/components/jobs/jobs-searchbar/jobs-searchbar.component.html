@@ -1,7 +1,15 @@
 <div class="neptune-grid">
   <div class="page-content align-items-stretch row">
-    <mat-form-field class="col-2">
+    <mat-form-field class="col-3">
       <input matInput placeholder="Search by keywords">
+    </mat-form-field>
+    <mat-form-field class="col-3">
+      <mat-label>Industries</mat-label>
+      <mat-select>
+        <mat-option value="accounting">Accounting</mat-option>
+        <mat-option value="banking">Banking</mat-option>
+        <mat-option value="computing">Computing</mat-option>
+      </mat-select>
     </mat-form-field>
     <mat-form-field class="col-2">
       <mat-label>Location</mat-label>
@@ -20,45 +28,40 @@
         <mat-option value="contract">Contract</mat-option>
       </mat-select>
     </mat-form-field>
-    <mat-form-field class="col-2">
-      <mat-label>Industries</mat-label>
-      <mat-select>
-        <mat-option value="accounting">Accounting</mat-option>
-        <mat-option value="banking">Banking</mat-option>
-        <mat-option value="computing">Computing</mat-option>
-      </mat-select>
-    </mat-form-field>
-    <mat-form-field class="col-1">
-      <mat-label>Salary</mat-label>
-      <mat-select>
-        <mat-option value="60">60k</mat-option>
-        <mat-option value="70">70k</mat-option>
-        <mat-option value="80">80k</mat-option>
-      </mat-select>
-    </mat-form-field>
-    <mat-form-field class="col-1">
-      <mat-label>Experience</mat-label>
-      <mat-select>
-        <mat-option value="1">1 years</mat-option>
-        <mat-option value="2">2 years</mat-option>
-        <mat-option value="3">3 years</mat-option>
-      </mat-select>
-    </mat-form-field>
-    <mat-form-field class="col-1">
-      <mat-label>Experience</mat-label>
-      <mat-select>
-        <mat-option value="1">1 years</mat-option>
-        <mat-option value="2">2 years</mat-option>
-        <mat-option value="3">3 years</mat-option>
-      </mat-select>
-    </mat-form-field>
-    <mat-form-field class="col-1">
-      <mat-label>Experience</mat-label>
-      <mat-select>
-        <mat-option value="1">1 years</mat-option>
-        <mat-option value="2">2 years</mat-option>
-        <mat-option value="3">3 years</mat-option>
-      </mat-select>
-    </mat-form-field>
+    <div class="col-2 btn-css">
+      <button mat-raised-button color="primary" (click)="openDialog()">Search</button>
+        <!-- <mat-form-field>
+          <mat-label>Salary</mat-label>
+          <mat-select>
+            <mat-option value="60">60k</mat-option>
+            <mat-option value="70">70k</mat-option>
+            <mat-option value="80">80k</mat-option>
+          </mat-select>
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>Experience</mat-label>
+          <mat-select>
+            <mat-option value="1">1 years</mat-option>
+            <mat-option value="2">2 years</mat-option>
+            <mat-option value="3">3 years</mat-option>
+          </mat-select>
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>Experience</mat-label>
+          <mat-select>
+            <mat-option value="1">1 years</mat-option>
+            <mat-option value="2">2 years</mat-option>
+            <mat-option value="3">3 years</mat-option>
+          </mat-select>
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>Experience</mat-label>
+          <mat-select>
+            <mat-option value="1">1 years</mat-option>
+            <mat-option value="2">2 years</mat-option>
+            <mat-option value="3">3 years</mat-option>
+          </mat-select>
+        </mat-form-field> -->
+    </div>
   </div>
 </div>

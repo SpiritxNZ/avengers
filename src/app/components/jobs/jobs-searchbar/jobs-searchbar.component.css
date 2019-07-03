@@ -1,4 +1,6 @@
 .t_info_search_bar {
-  float: left;
   width: 230px;
+}
+.btn-css{
+  line-height: 4rem;
 }
