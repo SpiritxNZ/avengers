@@ -1,0 +1,5 @@
+.jobs_list{
+    height:55rem;
+    overflow: scroll;
+    overflow-x: hidden;
+}
