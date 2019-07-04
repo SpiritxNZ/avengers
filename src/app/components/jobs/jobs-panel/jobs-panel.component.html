@@ -3,8 +3,28 @@
     <div class="filter-holder">
       <app-jobs-searchbar></app-jobs-searchbar>
     </div>
+    <div class="sordby-bar container">
+      <div class="sordby-content">
+        <div class="sordby-detail">
+          <div class="sordby-dropdown">
+            <label class="sordby-label font-12">Sord by:</label>
+            <button class="font-12 sortby-select-btn dropdown-toggle" data-toggle="dropdown">
+              <p>Relevance</p>
+            </button>
+            <ul class="dropdown-menu ul-dropdown">
+              <li>
+                <a class="li-btn font-14" href="#">Relevance</a>
+              </li>
+              <li>
+                <a class="li-btn font-14" href="#">Post date</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
     <div class="forms">
-      <div class="container-fuild row">
+      <div class="container-fuild row" >
         <div class="col-6">
           <app-jobs-listing></app-jobs-listing>
         </div>

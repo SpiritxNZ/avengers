@@ -1,5 +1,6 @@
-.main-content{
-  padding-bottom: 5rem;
+.main-content {
+  padding-bottom: 1rem;
+  height: 100%;
 }
 
 .filter-holder {
@@ -12,8 +13,94 @@
   color: #555;
 }
 
-.container-fuild {
-  margin-top: 0.5rem;
+p {
+  margin: 0;
 }
 
+.sordby-bar {
+  padding: 0.5rem 0;
+  background: 0 0;
+  border-top: 0;
+  border-bottom: 0;
+}
 
+.sortby-content {
+  box-sizing: content-box;
+  display: block;
+  margin: auto;
+}
+
+.sordby-detail {
+  box-sizing: content-box;
+  display: block;
+  margin: auto;
+}
+
+.sordby-dropdown {
+  position: relative;
+  display: flex;
+  align-items: center;
+  margin-right: 0.75rem;
+  overflow: visible;
+}
+
+.sordby-label {
+  margin-right: 4px !important;
+  margin: 0 !important;
+}
+
+.sortby-select-btn {
+  display: flex;
+  align-items: center;
+  margin-right: 0.5rem;
+  font-weight: 600 !important;
+  background: 0 0;
+  border: none;
+  cursor: pointer;
+}
+
+.ul-dropdown {
+  box-shadow: 0 0 0  0.0625rem rgba(0, 0, 0, .15);
+  border-radius: 0.125rem;
+  transition: box-shadow 83ms;
+  box-sizing: border-box;
+  max-width: 16.5rem;
+  max-height: 34.25rem;
+  padding: 4px 0;
+  margin: 0;
+  background: #fff;
+  left: 0;
+  right: auto;
+  list-style: none;
+  position: absolute;
+  top: 100%;
+  z-index: 10;
+  width: auto;
+  min-width: 8.75rem;
+  vertical-align: baseline;
+}
+
+.ul-dropdown li {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  vertical-align: baseline;
+  background: 0 0;
+}
+
+.li-btn {
+  background: #f3f6f8;
+  color: #0091ca;
+  align-items: center;
+  display: flex;
+  padding: 0.25rem 1rem;
+  text-align: left;
+  white-space: nowrap;
+  width: 100%;
+  border: none;
+  cursor: pointer;
+  font-weight: 600;
+  text-rendering: auto;
+}
