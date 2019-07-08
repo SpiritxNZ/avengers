@@ -1,6 +1,6 @@
-.card ul {  
+.card ul {
   overflow-x: hidden;
-    overflow-y: auto;
+  overflow-y: auto;
 }
 
 .job-item {
@@ -8,7 +8,7 @@
   padding-bottom: 0.5rem;
   padding-left: 1.5rem;
   padding-right: 1.5rem;
-  display: flex;  
+  display: flex;
 }
 
 .card .company-icon img {
@@ -17,12 +17,12 @@
 }
 
 .company-content {
-  width: 100% !important; 
+  width: 100% !important;
   border-bottom: 1px solid #d0d0d0;
 }
 
 .company-content-brief {
-  padding-left:0.5rem;
+  padding-left: 0.5rem;
   float: left;
 }
 
@@ -36,7 +36,7 @@ p {
 
 .job-list-header {
   border-left: solid 0.125rem #0073b1;
-  border-bottom: 0.0625rem solid rgba(0,0,0,.15);
+  border-bottom: 0.0625rem solid rgba(0, 0, 0, .15);
   align-items: center;
 }
 

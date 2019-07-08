@@ -1,0 +1,187 @@
+.job-detail {
+  overflow-x: hidden;
+  overflow-y: auto;
+  width: 100%;
+}
+
+.job-detail-main-content {
+  margin-top: 0;
+  box-sizing: border-box;
+  width: 100% !important;
+}
+
+.relative {
+  position: relative !important;
+}
+
+.job-box {
+  box-shadow: none;
+  border-bottom: 1px solid rgba(0, 0, 0, .15);
+  padding: 24px 0 0;
+  margin-top: 0;
+  margin-bottom: 0;
+  border-radius: 2px;
+  position: relative;
+  z-index: 1;
+  animation: fade-in 834ms 1;
+  background-color: #fff;
+  background-clip: padding-box;
+  transition: box-shadow 83ms;
+}
+
+.job-detail-top-card {
+  padding: 0 24px;
+  flex-flow: row;
+  align-items: flex-start;
+  display: flex;
+}
+
+.job-detail-top-card .company-logo {
+  width: 128px;
+  height: 128px;
+  box-sizing: border-box;
+  background-clip: content-box;
+  border: 4px solid transparent;
+  border-radius: 6px;
+  position: relative;
+  top: auto;
+  left: auto;
+  right: auto;
+  min-width: 128px;
+  min-height: 128px;
+  order: 1;
+  box-shadow: none;
+  margin-right: -3px;
+  margin-bottom: 24px;
+  display: flex;
+}
+
+.job-detail-top-card .company-logo img {
+  opacity: 1;
+  border-radius: 2px;
+  max-width: 100%;
+  max-height: 100%;
+}
+
+.job-detail-top-card .content-container {
+  padding-left: 24px;
+  order: 2;
+  padding-bottom: 24px;
+}
+
+.job-detail-top-card .content-container h1 {
+  width: auto;
+  font-size: 1.3rem;
+  line-height: 1.4;
+  font-weight: 400;
+  color: rgba(0, 0, 0, .9);
+}
+
+.job-detail-top-card .content-container .company-info {
+  font-size: 1.1rem;
+  line-height: 1.75;
+  font-weight: 400;
+  color: rgba(0, 0, 0, .6);
+  max-width: 500px;
+  margin-top: 4px !important;
+}
+
+.job-detail-top-card .content-container .job-info {
+  font-size: 0.8rem;
+  line-height: 1.33333;
+  font-weight: 400;
+  color: rgba(0, 0, 0, .6);
+  margin-top: 8px;
+  margin-bottom: 0;
+}
+
+.job-detail-top-card .content-container .actions {
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  margin-top: 16px !important;
+}
+
+.job-detail-top-card .content-container .actions .save-button {
+  transition-timing-function: cubic-bezier(.4, 0, .2, 1);
+  transition-duration: 167ms;
+  align-items: center;
+  border: none;
+  border-radius: 2px;
+  box-sizing: border-box;
+  display: inline-flex;
+  justify-content: center;
+  max-width: 480px;
+  overflow: hidden;
+  outline-width: 2px;
+  transition-property: background-color, box-shadow, color;
+  vertical-align: middle;
+  font-size: 1rem;
+  min-height: 40px;
+  padding: 10px 16px;
+  background-color: transparent;
+  box-shadow: inset 0 0 0 1px #0073b1;
+  margin-right: 8px !important;
+  cursor: pointer;
+  font-family: inherit;
+  font-weight: 600;
+  line-height: 20px;
+  color: #0073b1;
+  text-align: center;
+}
+
+button {
+  background: 0 0;
+  touch-action: manipulation;
+  text-rendering: auto;
+  letter-spacing: normal;
+  word-spacing: normal;
+  text-transform: none;
+  text-indent: 0px;
+  text-shadow: none;
+  font: 400 13.3333px Arial;
+  -webkit-appearance: button;
+}
+
+span {
+  outline: 0;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  vertical-align: baseline;
+  background: 0 0;
+}
+
+.job-apply {
+  animation: fade-in .5s 1;
+  display: inline-flex !important;
+  margin-right: 8px !important;
+}
+
+.job-apply .job-apply-button {
+  margin: 0;
+  white-space: nowrap;
+  transition-timing-function: cubic-bezier(.4, 0, .2, 1);
+  transition-duration: 167ms;
+  align-items: center;
+  border: none;
+  border-radius: 2px;
+  box-sizing: border-box;
+  cursor: pointer;
+  font-family: inherit;
+  font-weight: 600;
+  display: inline-flex;
+  justify-content: center;
+  max-width: 480px;
+  overflow: hidden;
+  outline-width: 2px;
+  transition-property: background-color, box-shadow, color;
+  vertical-align: middle;
+  font-size: 1rem;
+  min-height: 40px;
+  line-height: 20px;
+  padding: 10px 16px;
+  background-color: #0073b1;
+  color: #fff;
+  text-align: center;
+}
