@@ -14,7 +14,6 @@ import { NavbarComponent } from './components/general/navbar/navbar.component';
 import { FooterComponent } from './components/general/footer/footer.component';
 import { JobComponent } from './components/jobs/job/job.component';
 import { TestComponent } from './components/test/test.component';
-import { SearchfilterPipe } from './shared/pipes/searchfilter.pipe';
 
 
 @NgModule({
@@ -27,7 +26,6 @@ import { SearchfilterPipe } from './shared/pipes/searchfilter.pipe';
     FooterComponent,
     JobComponent,
     TestComponent,
-    SearchfilterPipe,
   ],
   imports: [
     BrowserModule,
