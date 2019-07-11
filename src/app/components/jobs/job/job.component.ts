@@ -1,6 +1,7 @@
 import { Component, OnInit} from '@angular/core';
 import { Subscription } from 'rxjs';
 
+import { ContentService } from '../../../services/http/content.service'
 import { StoreValueService } from '../../../services/sentvalue/storevalue.service';
 
 @Component({
@@ -10,10 +11,11 @@ import { StoreValueService } from '../../../services/sentvalue/storevalue.servic
 })
 export class JobComponent implements OnInit {
   public action: any;
-  public sub: Subscription;
+  public descri: any;
 
   constructor(
-    private storeValueService: StoreValueService
+    private storeValueService: StoreValueService,
+    private contentservice: ContentService
   ) { }
 
   ngOnInit() {
@@ -23,6 +25,11 @@ export class JobComponent implements OnInit {
     this.storeValueService.getJob.subscribe(
       (action) => {
         this.action = action;
+        this.contentservice.jobdescri(action['id']).subscribe(
+          (res) => {
+            this.descri = res.job_description[0].description;
+          }
+        )
       }
     );
   }

@@ -8,14 +8,13 @@ import { environment } from '../../../environments/environment.prod';
 export class ContentService {
   private baseUrl: any = environment.baseUrl;
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) { }  
 
-  getData(pageSize) {
-    return this.http.get<any>(this.baseUrl + "?page=" + pageSize);
+  searchKeyWord(keyword, jobdiscipline, joblocation, jobtype, pageSize) {
+    return this.http.get<any>(this.baseUrl + "/findjobs" + "?key_word=" + keyword + "&job_discipline=" + jobdiscipline + "&job_location=" + joblocation + "&job_type=" + jobtype + "&page=" + pageSize)
   }
 
-
-  searchKeyWord(keyword) {
-    return this.http.get<any>(this.baseUrl + "?key_word=" + keyword);
+  jobdescri(id){
+    return this.http.get<any>(this.baseUrl + "/jobdetail?id=" + id);
   }
 }

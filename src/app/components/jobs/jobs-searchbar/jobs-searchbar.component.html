@@ -5,31 +5,43 @@
     </mat-form-field>
     <mat-form-field class="col-3">
       <mat-label>Industries</mat-label>
-      <mat-select>
-        <mat-option value="accounting">Accounting</mat-option>
-        <mat-option value="banking">Banking</mat-option>
-        <mat-option value="computing">Computing</mat-option>
+      <mat-select [(ngModel)]="industryId">
+        <mat-option value="1">Information Technology</mat-option>
+        <mat-option value="2">Construction</mat-option>
+        <mat-option value="3">Government</mat-option>
       </mat-select>
     </mat-form-field>
     <mat-form-field class="col-2">
       <mat-label>Location</mat-label>
-      <mat-select>
-        <mat-option value="auckland">Auckland</mat-option>
-        <mat-option value="hamilton">Hamilton</mat-option>
-        <mat-option value="waihi">Waihi</mat-option>
-        <mat-option value="wellington">Wellington</mat-option>
+      <mat-select [(ngModel)]="locationId">
+        <mat-option value="1">Auckland</mat-option>
+        <mat-option value="2">Wellington</mat-option>
+        <mat-option value="3">Manawatu</mat-option>
+        <mat-option value="4">Taranaki</mat-option>
+        <mat-option value="5">Waikato</mat-option>
+        <mat-option value="6">Bay of Plenty</mat-option>
+        <mat-option value="7">Hawkes Bay</mat-option>
+        <mat-option value="8">Northland</mat-option>
+        <mat-option value="9">Blenheim</mat-option>
+        <mat-option value="10">Canterbury</mat-option>
+        <mat-option value="11">Otago</mat-option>
+        <mat-option value="12">SouthLand</mat-option>
+        <mat-option value="13">Franz Josef Glacier</mat-option>
+        <mat-option value="14">Tasman</mat-option>
       </mat-select>
     </mat-form-field>
     <mat-form-field class="col-2">
       <mat-label>Type</mat-label>
-      <mat-select>
-        <mat-option value="fulltime">Full Time</mat-option>
-        <mat-option value="parttime">Part Time</mat-option>
-        <mat-option value="contract">Contract</mat-option>
+      <mat-select [(ngModel)]="typeId">
+        <mat-option value="1">Permanent</mat-option>
+        <mat-option value="2">Contract</mat-option>
+        <mat-option value="3">Temporary</mat-option>
+        <mat-option value="4">Intern</mat-option>
+        <mat-option value="5">Volunteer</mat-option>
       </mat-select>
     </mat-form-field>
     <div class="col-2 btn-css">
-      <button mat-raised-button color="primary" (click)="onSearch()">Search</button>
+      <button mat-raised-button color="primary" (click)="onSearch(null)">Search</button>
       <span class="mat-icon-span">
         <mat-icon class="mat-icon">tune</mat-icon>
         Filter

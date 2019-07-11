@@ -12,7 +12,10 @@ export class JobsListingComponent implements OnInit {
   public jobLists: any;
   public resultsLength = 0;
   public lengthTotal: any;
-  public num = 1;
+  public keyword: any;
+  public industry: any;
+  public location: any;
+  public type: any;
 
   constructor(
     private contentservice: ContentService,
@@ -27,10 +30,15 @@ export class JobsListingComponent implements OnInit {
   getMessage() {
     this.storeValueService.getListData.subscribe(
       (res) => {
-        this.contentservice.searchKeyWord(res).subscribe(
+        this.keyword = res.keyword;
+        this.industry = res.industry;
+        this.location = res.location;
+        this.type = res.type;
+        this.contentservice.searchKeyWord(res.keyword, res.industry, res.location, res.type, 1).subscribe(
           (act) => {
             this.jobLists = act.data;
             this.lengthTotal = act.total;
+            // console.log(this.jobLists);
           }
         );
       },
@@ -46,12 +54,9 @@ export class JobsListingComponent implements OnInit {
 
   // when click previous or next page, call the following function.
   getPage(event) {
-    this.contentservice.getData(event.pageIndex + 1).subscribe(
+    this.contentservice.searchKeyWord(this.keyword, this.industry, this.location, this.type, event.pageIndex + 1).subscribe(
       (res) => {
         this.jobLists = res.data;
-      },
-      (err) => {
-        console.log(err)
       }
     )
   }

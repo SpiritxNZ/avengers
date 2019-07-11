@@ -2,8 +2,8 @@
   <div class="job-list-header">
     <div class="header-first">
       Web development in New Zealand
-      <div class="font-mini">
-        233 results
+      <div class="font-mini" *ngIf="lengthTotal">
+        {{lengthTotal}} results
       </div>
     </div>
   </div>

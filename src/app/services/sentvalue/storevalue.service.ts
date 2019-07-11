@@ -6,8 +6,8 @@ import { Subject } from 'rxjs';
 })
 export class StoreValueService {
   // Data from Search bar is stored here
-  public searchToJobList = new Subject();
-  public getListData = this.searchToJobList.asObservable();
+  public searchKeyWord = new Subject<any>();
+  public getListData = this.searchKeyWord.asObservable();
 
   // a Data in Job List is stored here
   public jobListToJob = new Subject();
