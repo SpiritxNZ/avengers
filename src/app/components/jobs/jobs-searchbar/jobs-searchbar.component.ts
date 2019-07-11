@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
-import { StoreValueService } from '../../../services/sentvalue/storevalue.service';
+import { StoreValueService } from '../../../services/storevalue/storevalue.service';
 import { Router } from '@angular/router';
 
 @Component({
@@ -24,6 +24,7 @@ export class JobsSearchbarComponent implements OnInit {
   ngOnInit() {
   }
 
+  // get searching results by limited conditions, and 
   onSearch(event) {
     if (event !== null && !(event.type == "keydown" && event.key == "Enter")) {
       return;
@@ -31,19 +32,19 @@ export class JobsSearchbarComponent implements OnInit {
       let searchBy = 'key_word';
       let searchString = this.keyword;
       let disciplineBy = 'job_discipline'
-      let disciplineNum = this.industryId;
+      let disciplineId = this.industryId;
       let locationBy = 'job_location';
-      let locationNum = this.locationId;
+      let locationId = this.locationId;
       let typeBy = 'job_type';
-      let typeNum = this.typeId;
+      let typeId = this.typeId;
       this.setQueryParams('searchBy', searchBy);
       this.setQueryParams('searchString', searchString);
       this.setQueryParams('disciplineBy', disciplineBy);
-      this.setQueryParams('disciplineNum', disciplineNum);
+      this.setQueryParams('disciplineNum', disciplineId);
       this.setQueryParams('locationBy', locationBy);
-      this.setQueryParams('locationNum', locationNum);
+      this.setQueryParams('locationNum', locationId);
       this.setQueryParams('typeBy', typeBy);
-      this.setQueryParams('typeNum', typeNum);
+      this.setQueryParams('typeNum', typeId);
     }
     let obj = {
       keyword: this.keyword,

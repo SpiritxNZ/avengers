@@ -1,7 +1,7 @@
 import { Component, OnInit, SimpleChanges } from '@angular/core';
 
 import { ContentService } from '../../../services/http/content.service';
-import { StoreValueService } from '../../../services/sentvalue/storevalue.service';
+import { StoreValueService } from '../../../services/storevalue/storevalue.service';
 
 @Component({
   selector: 'app-jobs-listing',

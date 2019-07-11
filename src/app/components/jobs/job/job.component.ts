@@ -2,7 +2,7 @@ import { Component, OnInit} from '@angular/core';
 import { Subscription } from 'rxjs';
 
 import { ContentService } from '../../../services/http/content.service'
-import { StoreValueService } from '../../../services/sentvalue/storevalue.service';
+import { StoreValueService } from '../../../services/storevalue/storevalue.service';
 
 @Component({
   selector: 'app-job',

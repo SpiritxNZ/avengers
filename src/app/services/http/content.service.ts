@@ -10,10 +10,12 @@ export class ContentService {
 
   constructor(private http: HttpClient) { }  
 
+  // get filtering data
   searchKeyWord(keyword, jobdiscipline, joblocation, jobtype, pageSize) {
-    return this.http.get<any>(this.baseUrl + "/findjobs" + "?key_word=" + keyword + "&job_discipline=" + jobdiscipline + "&job_location=" + joblocation + "&job_type=" + jobtype + "&page=" + pageSize)
+    return this.http.get<any>(this.baseUrl + "/findjobs?" + "key_word=" + keyword + "&job_discipline=" + jobdiscipline + "&job_location=" + joblocation + "&job_type=" + jobtype + "&page=" + pageSize)
   }
 
+  // get description from an item of data 
   jobdescri(id){
     return this.http.get<any>(this.baseUrl + "/jobdetail?id=" + id);
   }
