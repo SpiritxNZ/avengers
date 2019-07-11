@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
+
+import { StoreValueService } from '../../../services/sentvalue/storevalue.service';
 
 @Component({
   selector: 'app-jobs-searchbar',
@@ -7,14 +8,17 @@ import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog
   styleUrls: ['./jobs-searchbar.component.css']
 })
 export class JobsSearchbarComponent implements OnInit {
+  public searchRes: any;
+  public keyword: any;
 
-  constructor() { }
+  constructor(
+    private storeValueService: StoreValueService
+  ) { }
 
   ngOnInit() {
   }
 
-  // openDialog(): void {
-  //   const dialogRef = this.dialog.open(DialogOverviewExampleDialog, { width: '250px' });
-  // }
-
+  onSearch() {
+    this.storeValueService.searchToJobList.next(this.keyword);
+  }
 }

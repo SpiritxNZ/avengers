@@ -1,4 +1,4 @@
-<section class="main-content">
+<section class="main-content" style="overflow: hidden">
   <div class="container content-inner">
     <div class="filter-holder">
       <app-jobs-searchbar></app-jobs-searchbar>
@@ -24,12 +24,19 @@
       </div>
     </div>
     <div class="forms">
-      <div class="container-fuild row" >
-        <div class="col-6">
-          <app-jobs-listing></app-jobs-listing>
+      <div class="container-fuild">
+        <div *ngIf="!screenwidth" class="row" style="overflow: hidden">
+          <div id="job-list-left" class="col-6">
+            <app-jobs-listing></app-jobs-listing>
+          </div>
+          <div id="job-list-right" class="col-6">
+            <app-job></app-job>
+          </div>
         </div>
-        <div class="col-6">
-          <app-job></app-job>
+        <div *ngIf="screenwidth" class="row">
+          <div class="col-12">
+            <app-jobs-listing></app-jobs-listing>
+          </div>
         </div>
       </div>
     </div>

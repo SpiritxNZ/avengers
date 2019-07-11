@@ -1,7 +1,7 @@
 <div class="card">
   <div class="page-content align-items-stretch row">
     <mat-form-field class="col-3 search-bar">
-      <input matInput placeholder="Search by keywords">
+      <input matInput placeholder="Search by keywords" [(ngModel)]="keyword" >
     </mat-form-field>
     <mat-form-field class="col-3">
       <mat-label>Industries</mat-label>
@@ -29,7 +29,7 @@
       </mat-select>
     </mat-form-field>
     <div class="col-2 btn-css">
-      <button mat-raised-button color="primary" (click)="openDialog()">Search</button>
+      <button mat-raised-button color="primary" (click)="onSearch()">Search</button>
       <span class="mat-icon-span">
         <mat-icon class="mat-icon">tune</mat-icon>
         Filter

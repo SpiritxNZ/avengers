@@ -185,3 +185,59 @@ span {
   color: #fff;
   text-align: center;
 }
+
+.job-details-job-summary {
+  box-shadow: none;
+  border-bottom: 1px solid rgba(0, 0, 0, .15);
+  font-size: 1.2rem;
+  line-height: 1.33333;
+  font-weight: 400;
+  color: rgba(0, 0, 0, .6);
+  display: flex;
+  border-radius: 2px;
+  margin-bottom: 16px;
+  /* padding: 0; */
+  animation: fade-in 834ms 1;
+  background-color: #fff;
+  background-clip: padding-box;
+}
+
+.list-divider {
+  border-right: 1px solid rgba(0, 0, 0, .15);
+  max-width: 32.5%;
+  flex: 1 0 auto;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  min-height: 100px;
+  padding-right: 8px !important;
+  margin-left: 24px !important;
+}
+
+h2 {
+  font-size: 1rem;
+  line-height: 1.75;
+  font-weight: 400;
+  color: rgba(0, 0, 0, .9);
+  margin-bottom: 8px !important;
+}
+
+div ul {
+  font-size: 0.8rem;
+  line-height: 1.33333;
+  font-weight: 400;
+  color: rgba(0, 0, 0, .6);
+  padding-left: 0;
+}
+
+div ul li {
+  height: 24px;
+  display: flex !important;
+  align-items: center !important;
+  margin-bottom: 4px !important;
+}
+
+div ul li span {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}

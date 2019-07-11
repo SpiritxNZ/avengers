@@ -5,33 +5,29 @@
         <div class="relative">
           <div class="job-box">
             <div class="job-detail-top-card">
-              <div class="company-logo">
-                <img src="../../../../assets/images/shared/aws.png" />
-              </div>
               <div class="content-container">
-                <h1>.Net Developer - Angular 2/4/6</h1>
+                <h1 *ngIf="action">{{action.title}}</h1>
                 <div class="company-info">
-                  <span>Talent</span>&nbsp;&middot;
-                  <span>Auckland</span>
+                  <span *ngIf="action && action.principal != ''">{{action.principal}}&nbsp;&middot;</span>
+                  <span *ngIf="action">{{action.location_name}}</span>
                 </div>
-                <p class="job-info">
-                  <span>Posted 2 weeks ago</span>&nbsp;&middot;
-                  <span>74 views</span>
-                </p>
                 <div class="actions display-flex align-items-center">
-                  <button class="save-button">
-                    <span>Save</span>
-                  </button>
-                  <div class="job-apply">
+                  <div class="job-apply" *ngIf="action">
+                    <a href="{{action.link}}" style="text-decoration:none">
                       <button class="job-apply-button">
-                          <span>Apply</span>
+                        <span>Link to the web</span>
                       </button>
+                    </a>
                   </div>
                 </div>
               </div>
             </div>
           </div>
-          <div class=""></div>
+          <div class="">
+            <article>
+              <div [innerHTML]="action.description" *ngIf="action"></div>
+            </article>
+          </div>
         </div>
       </div>
     </div>

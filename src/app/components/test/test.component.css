@@ -1,0 +1,38 @@
+.card-header {
+  margin-top: 0.5rem;
+}
+
+mat-form-field {
+  margin-right: 1.5rem;
+}
+
+.search-bar {
+  width: 13rem;
+}
+
+.search-dropdown {
+  width: 13rem;
+}
+
+@media screen and (min-width: 769px) {
+  .search-bar {
+    width: 20rem;
+  }
+  .search-dropdown {
+    width: 13rem;
+  }
+}
+
+.search-button {
+  margin-top: 0.8rem;
+}
+
+.mat-icon-span {
+  margin-left: 1rem;
+}
+
+.mat-icon {
+  position: relative;
+  top: 0.5rem;
+  left: 0.3rem;
+}

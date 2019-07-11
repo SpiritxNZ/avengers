@@ -1,3 +1,9 @@
+.loaderLarge {
+  position: fixed;
+  top: 40%;
+  left: 50%;
+}
+
 .card ul {
   overflow-x: hidden;
   overflow-y: auto;
@@ -46,4 +52,13 @@ p {
   padding-left: 0.75rem;
   padding-top: 0.5rem;
   padding-bottom: 0.5rem;
+}
+h3{
+  cursor: pointer;
+}
+h3:hover {
+  color: blueviolet !important;
+}
+h3:active {
+  color: green !important;
 }

@@ -1,0 +1,43 @@
+<section class="container">
+  <header class="card card-header">
+    <div class="row">
+      <div class="col-10">
+        <mat-form-field class="search-bar">
+          <input matInput placeholder="Search by keywords">
+        </mat-form-field>
+        <mat-form-field class="search-dropdown">
+          <mat-label>Industries</mat-label>
+          <mat-select>
+            <mat-option value="accounting">Accounting</mat-option>
+            <mat-option value="banking">Banking</mat-option>
+            <mat-option value="computing">Computing</mat-option>
+          </mat-select>
+        </mat-form-field>
+        <mat-form-field class="search-dropdown">
+          <mat-label>Location</mat-label>
+          <mat-select>
+            <mat-option value="auckland">Auckland</mat-option>
+            <mat-option value="hamilton">Hamilton</mat-option>
+            <mat-option value="waihi">Waihi</mat-option>
+            <mat-option value="wellington">Wellington</mat-option>
+          </mat-select>
+        </mat-form-field>
+        <mat-form-field class="search-dropdown" style="margin-right: 0;">
+          <mat-label>Type</mat-label>
+          <mat-select>
+            <mat-option value="fulltime">Full Time</mat-option>
+            <mat-option value="parttime">Part Time</mat-option>
+            <mat-option value="contract">Contract</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <div class="col-2">
+        <button mat-raised-button color="primary" class="search-button">Search</button>
+        <span class="mat-icon-span">
+          <mat-icon class="mat-icon">tune</mat-icon>
+          Filter
+        </span>
+      </div>
+    </div>
+  </header>
+</section>
