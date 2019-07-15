@@ -1,4 +1,5 @@
 import { Component, OnInit, Directive } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 
 import { ContentService } from '../../../services/http/content.service';
 import { StoreValueService } from '../../../services/storevalue/storevalue.service';
@@ -20,10 +21,12 @@ export class JobsListingComponent implements OnInit {
   public industry: any;
   public location: any;
   public type: any;
+  public currentPage: number = 1;
 
   constructor(
     private contentservice: ContentService,
-    private storeValueService: StoreValueService
+    private storeValueService: StoreValueService,
+    private activatedRoute: ActivatedRoute
   ) { }
 
   ngOnInit() {
@@ -39,10 +42,11 @@ export class JobsListingComponent implements OnInit {
         this.location = res.location;
         this.type = res.type;
         this.contentservice.searchKeyWord(res.keyword, res.industry, res.location, res.type, 1).subscribe(
-          (act) => {
+          (act) => {            
             this.jobLists = act.data;
             this.lengthTotal = act.total;
             // console.log(this.jobLists);
+            // this.refreshPageControl();
           }
         );
       },
@@ -65,5 +69,13 @@ export class JobsListingComponent implements OnInit {
         document.getElementById("jobslist").scrollTop = 0;
       }
     )
+  }
+
+  refreshPageControl() {
+    this.activatedRoute.queryParams.subscribe(res => {
+      let { searchString, searchBy, disciplineNum, disciplineBy, locationNum, locationBy, typeNum, typeBy } = res;
+      
+    })
+    return;
   }
 }

@@ -13,6 +13,6 @@ export class StoreValueService {
   public jobListToJob = new Subject();
   public getJob = this.jobListToJob.asObservable();
 
-  constructor() { }
+  constructor() {  }
 
 }

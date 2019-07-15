@@ -18,10 +18,11 @@ export class JobsSearchbarComponent implements OnInit {
 
   constructor(
     private storeValueService: StoreValueService,
-    private router: Router
+    private router: Router    
   ) { }
 
   ngOnInit() {
+
   }
 
   // get searching results by limited conditions, and 
@@ -31,12 +32,37 @@ export class JobsSearchbarComponent implements OnInit {
     } else {
       let searchBy = 'key_word';
       let searchString = this.keyword;
-      let disciplineBy = 'job_discipline'
+      let disciplineBy = 'job_discipline';
       let disciplineId = this.industryId;
       let locationBy = 'job_location';
       let locationId = this.locationId;
       let typeBy = 'job_type';
       let typeId = this.typeId;
+
+      // let searchBy: any;
+      // let searchString: any;
+      // let disciplineBy: any;
+      // let disciplineId: any;
+      // let locationBy: any;
+      // let locationId: any;
+      // let typeBy: any;
+      // let typeId: any;
+
+      // (initValue == undefined) ?
+      //   { searchString, searchBy, disciplineId, disciplineBy, locationId, locationBy, typeId, typeBy } =
+      //   {
+      //     searchBy: 'key_word',
+      //     searchString: this.keyword,
+      //     disciplineBy: 'job_discipline',
+      //     disciplineId: this.industryId,
+      //     locationBy: 'job_location',
+      //     locationId: this.locationId,
+      //     typeBy: 'job_type',
+      //     typeId: this.typeId
+      //   } :
+      //   { searchString, searchBy, disciplineId, disciplineBy, locationId, locationBy, typeId, typeBy } = initValue;
+
+
       this.setQueryParams('searchBy', searchBy);
       this.setQueryParams('searchString', searchString);
       this.setQueryParams('disciplineBy', disciplineBy);
@@ -45,6 +71,7 @@ export class JobsSearchbarComponent implements OnInit {
       this.setQueryParams('locationNum', locationId);
       this.setQueryParams('typeBy', typeBy);
       this.setQueryParams('typeNum', typeId);
+      this.setQueryParams('page', 1);
     }
     let obj = {
       keyword: this.keyword,
