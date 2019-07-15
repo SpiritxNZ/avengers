@@ -1,8 +1,8 @@
 <div class="card" style="max-height: 48.375rem">
-  <div class="job-detail pt-4 ph-3">
+  <div class="job-detail pt-4 ph-3" id="jobcontent">
     <div class="job-view-layout">
-      <div class="job-detail-main-content relative">
-        <div class="relative">
+      <div class="job-detail-main-content relative" >
+        <div class="relative" id="jobcontent">
           <div class="job-box">
             <div class="job-detail-top-card">
               <div class="content-container">
@@ -23,11 +23,9 @@
               </div>
             </div>
           </div>
-          <div class="">
-            <article>
-              <div [innerHTML]="descri" *ngIf="action" style="padding:1rem;"></div>
-            </article>
-          </div>
+          <article>
+            <div [innerHTML]="descri" *ngIf="descri" style="padding:1rem;"></div>
+          </article>
         </div>
       </div>
     </div>

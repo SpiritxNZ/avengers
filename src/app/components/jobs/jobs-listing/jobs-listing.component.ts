@@ -1,4 +1,4 @@
-import { Component, OnInit, SimpleChanges } from '@angular/core';
+import { Component, OnInit, Directive } from '@angular/core';
 
 import { ContentService } from '../../../services/http/content.service';
 import { StoreValueService } from '../../../services/storevalue/storevalue.service';
@@ -7,6 +7,10 @@ import { StoreValueService } from '../../../services/storevalue/storevalue.servi
   selector: 'app-jobs-listing',
   templateUrl: './jobs-listing.component.html',
   styleUrls: ['./jobs-listing.component.css']
+})
+
+@Directive({
+  selector: '[onScroll]',
 })
 export class JobsListingComponent implements OnInit {
   public jobLists: any;
@@ -57,6 +61,8 @@ export class JobsListingComponent implements OnInit {
     this.contentservice.searchKeyWord(this.keyword, this.industry, this.location, this.type, event.pageIndex + 1).subscribe(
       (res) => {
         this.jobLists = res.data;
+        // everytime paginating the content goes back top
+        document.getElementById("jobslist").scrollTop = 0;
       }
     )
   }

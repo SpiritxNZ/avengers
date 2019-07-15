@@ -1,7 +1,7 @@
 <section class="container">
   <header class="card card-header">
     <div class="row">
-      <div class="col-10">
+      <div class="col-lg-10 col-xl-10" style="background: yellow">
         <mat-form-field class="search-bar">
           <input matInput placeholder="Search by keywords">
         </mat-form-field>
@@ -31,8 +31,10 @@
           </mat-select>
         </mat-form-field>
       </div>
-      <div class="col-2">
-        <button mat-raised-button color="primary" class="search-button">Search</button>
+      <div class="col-lg-2 col-xl-2 filterbar-right" style="background: green;">
+        <span class="search-button">
+          <button mat-raised-button color="primary">Search</button>
+        </span>
         <span class="mat-icon-span">
           <mat-icon class="mat-icon">tune</mat-icon>
           Filter

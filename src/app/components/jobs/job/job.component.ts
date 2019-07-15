@@ -1,5 +1,4 @@
 import { Component, OnInit} from '@angular/core';
-import { Subscription } from 'rxjs';
 
 import { ContentService } from '../../../services/http/content.service'
 import { StoreValueService } from '../../../services/storevalue/storevalue.service';
@@ -24,12 +23,14 @@ export class JobComponent implements OnInit {
   getJobItem() {
     this.storeValueService.getJob.subscribe(
       (action) => {
-        this.action = action;
+        this.action = action;                
         this.contentservice.jobdescri(action['id']).subscribe(
           (res) => {
-            this.descri = res.job_description[0].description;
+            this.descri = res.job_description[0].description;   
+            // when everytime refreshing this component, go to top
+            document.getElementById("jobcontent").scrollTop = 0;          
           }
-        )
+        )                
       }
     );
   }
