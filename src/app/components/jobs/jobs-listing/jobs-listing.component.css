@@ -1,12 +1,5 @@
-.loaderLarge {
-  position: fixed;
-  top: 40%;
-  left: 50%;
-}
-
-.card ul {
-  overflow-x: hidden;
-  overflow-y: auto;
+.scrolly{
+  overflow-y:scroll; 
 }
 
 .job-item {

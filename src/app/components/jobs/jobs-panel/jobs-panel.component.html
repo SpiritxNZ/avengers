@@ -1,44 +1,24 @@
-<section class="main-content" style="overflow: hidden" [ngStyle]="{'max-height.px': bodyHeight}">
-  <div class="container">
-    <div class="filter-holder" #totalContent>
-      <app-jobs-searchbar></app-jobs-searchbar>
+<app-navbar></app-navbar>
+<section class="main-content container" [ngStyle]="{'max-height.px': bodyHeight}">
+  <div class="filter-holder">
+    <app-jobs-searchbar></app-jobs-searchbar>
+  </div>
+  <div class="sordby-bar">
+    <mat-form-field class="font-12">
+      <mat-label>Sord by</mat-label>
+      <select matNativeControl required>
+        <option value="relevance">Relevance</option>
+        <option value="postdate">Post date</option>
+      </select>
+    </mat-form-field>
+  </div>
+  <div class="row">
+    <div id="job-list-left" class="col-6">
+      <app-jobs-listing></app-jobs-listing>
     </div>
-    <div class="sordby-bar container">
-      <div class="sordby-content">
-        <div class="sordby-detail">
-          <div class="sordby-dropdown">
-            <label class="sordby-label font-12">Sord by:</label>
-            <button class="font-12 sortby-select-btn dropdown-toggle" data-toggle="dropdown">
-              <p>Relevance</p>
-            </button>
-            <ul class="dropdown-menu ul-dropdown">
-              <li>
-                <a class="li-btn font-14" href="#">Relevance</a>
-              </li>
-              <li>
-                <a class="li-btn font-14" href="#">Post date</a>
-              </li>
-            </ul>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="forms">
-      <div class="container-fuild">
-        <div *ngIf="!screenwidth" class="row" style="overflow: hidden">
-          <div id="job-list-left" class="col-6">
-            <app-jobs-listing></app-jobs-listing>
-          </div>
-          <div id="job-list-right" class="col-6">
-            <app-job></app-job>
-          </div>
-        </div>
-        <div *ngIf="screenwidth" class="row">
-          <div class="col-12">
-            <app-jobs-listing></app-jobs-listing>
-          </div>
-        </div>
-      </div>
+    <div id="job-list-right" class="col-6">
+      <app-job></app-job>
     </div>
   </div>
 </section>
+<app-footer></app-footer>

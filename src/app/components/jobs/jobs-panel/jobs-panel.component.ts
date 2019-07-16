@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-jobs-panel',
@@ -8,20 +8,11 @@ import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 export class JobsPanelComponent implements OnInit {
   
 
-  public bodyHeight: any;
-  public viewHeight: number;
+  public bodyHeight = window.innerHeight;
 
   constructor(
-    private elementView: ElementRef
   ) { }  
 
   ngOnInit() {
-    this.windowonload();
-  }
-
-  windowonload() {
-    this.bodyHeight = window.innerHeight;
-    // this.viewHeight = this.elementView.nativeElement.offsetHeight;
-    // console.log(this.viewHeight);
   }
 }

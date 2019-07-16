@@ -1,4 +1,4 @@
-<div class="card" style="max-height: 48.375rem">
+<div class="card">
   <div class="job-list-header">
     <div class="header-first">
       {{keyword}} in New Zealand
@@ -7,20 +7,23 @@
       </div>
     </div>
   </div>
-  <ul style="overflow-y: auto; overflow-x:hidden;" *ngIf="jobLists" id="jobslist">
-    <li *ngFor="let i of jobLists">
-      <div class="job-item">
-        <div class="company-content">
-          <div class="company-content-brief">
-            <div class="clicktittle" (click)="sendMessage(i)">
-              <h3 style="color: blue"><b>{{i.title}}</b></h3>
+  <div class="scrolly">
+    <ul *ngIf="jobLists" id="jobslist">
+      <li *ngFor="let i of jobLists">
+        <div class="job-item">
+          <div class="company-content">
+            <div class="company-content-brief">
+              <div class="clicktittle" (click)="sendMessage(i)">
+                <h3 style="color: blue"><b>{{i.title}}</b></h3>
+              </div>
+              <h4 *ngIf="i.principal != ''"><b>{{i.principal}}</b></h4>
+              <h5>{{i.location_name}}, NZ</h5>
             </div>
-            <h4 *ngIf="i.principal != ''"><b>{{i.principal}}</b></h4>
-            <h5>{{i.location_name}}, NZ</h5>
           </div>
         </div>
-      </div>
-    </li>
-  </ul>
+      </li>
+    </ul>
+  </div>
+  <mat-paginator (page)="getPage($event)" [length]="lengthTotal" [pageSize]="20" *ngIf="jobLists"></mat-paginator>
+
 </div>
-<mat-paginator (page)="getPage($event)" [length]="lengthTotal" [pageSize]="20" *ngIf="jobLists"></mat-paginator>

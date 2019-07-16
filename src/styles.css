@@ -7,8 +7,6 @@ body {
   margin: 0;
   font-size: 14px;
   background: #EEF5F9;
-  overflow-x: hidden;
-  height: 100%;
   font-family: -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", "Fira Sans", Ubuntu, Oxygen, "Oxygen Sans", Cantarell, "Droid Sans", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Lucida Grande", Helvetica, Arial, sans-serif;
 }
 
@@ -40,52 +38,6 @@ textarea {
 textarea {
   resize: none;
   overflow: auto;
-}
-
-.clearfix {
-  zoom: 1;
-}
-
-.clearfix:after {
-  content: ".";
-  width: 0;
-  height: 0;
-  visibility: hidden;
-  display: block;
-  clear: both;
-  overflow: hidden;
-}
-
-.fl {
-  float: left
-}
-
-.fr {
-  float: right
-}
-
-.tl {
-  text-align: left;
-}
-
-.tc {
-  text-align: center
-}
-
-.tr {
-  text-align: right;
-}
-
-.ellipse {
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-}
-
-.inline {
-  display: inline-block;
-  *display: inline;
-  *zoom: 1;
 }
 
 h1,
@@ -141,6 +93,7 @@ h6,
   box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.1), -1px 0 2px rgba(0, 0, 0, 0.05);
   border: 0 solid #eee;
   border-radius: 0;
+  height: 100%;
 }
 
 /***Font***/
