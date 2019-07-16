@@ -6,7 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./jobs-panel.component.css']
 })
 export class JobsPanelComponent implements OnInit {
-  public screenwidth: boolean = false;
+  public bodyHeight: any;
 
   constructor() { }  
 
@@ -15,8 +15,6 @@ export class JobsPanelComponent implements OnInit {
   }
 
   windowonload() {
-    if(screen.width<768){
-      this.screenwidth = true;
-    }
+    this.bodyHeight = window.innerHeight;
   }
 }

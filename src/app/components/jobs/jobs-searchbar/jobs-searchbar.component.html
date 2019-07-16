@@ -6,38 +6,19 @@
     <mat-form-field class="col-3">
       <mat-label>Industries</mat-label>
       <mat-select [(ngModel)]="industryId">
-        <mat-option value="1">Information Technology</mat-option>
-        <mat-option value="2">Construction</mat-option>
-        <mat-option value="3">Government</mat-option>
+        <mat-option *ngFor="let i of jobDis" value="{{i.discipline_num}}">{{i.discipline_name}}</mat-option>
       </mat-select>
     </mat-form-field>
     <mat-form-field class="col-2">
       <mat-label>Location</mat-label>
       <mat-select [(ngModel)]="locationId">
-        <mat-option value="1">Auckland</mat-option>
-        <mat-option value="2">Wellington</mat-option>
-        <mat-option value="3">Manawatu</mat-option>
-        <mat-option value="4">Taranaki</mat-option>
-        <mat-option value="5">Waikato</mat-option>
-        <mat-option value="6">Bay of Plenty</mat-option>
-        <mat-option value="7">Hawkes Bay</mat-option>
-        <mat-option value="8">Northland</mat-option>
-        <mat-option value="9">Blenheim</mat-option>
-        <mat-option value="10">Canterbury</mat-option>
-        <mat-option value="11">Otago</mat-option>
-        <mat-option value="12">SouthLand</mat-option>
-        <mat-option value="13">Franz Josef Glacier</mat-option>
-        <mat-option value="14">Tasman</mat-option>
+        <mat-option *ngFor="let i of jobLoc" value="{{i.location_num}}">{{i.location_name}}</mat-option>
       </mat-select>
     </mat-form-field>
     <mat-form-field class="col-2">
       <mat-label>Type</mat-label>
       <mat-select [(ngModel)]="typeId">
-        <mat-option value="1">Permanent</mat-option>
-        <mat-option value="2">Contract</mat-option>
-        <mat-option value="3">Temporary</mat-option>
-        <mat-option value="4">Intern</mat-option>
-        <mat-option value="5">Volunteer</mat-option>
+        <mat-option *ngFor="let i of jobType" value="{{i.type_num}}">{{i.type_name}}</mat-option>
       </mat-select>
     </mat-form-field>
     <div class="col-2 btn-css">

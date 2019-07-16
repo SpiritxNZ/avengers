@@ -10,6 +10,11 @@ export class ContentService {
 
   constructor(private http: HttpClient) { }  
 
+  // search bar dropdown items
+  dropDownItems(){
+    return this.http.get<any>(this.baseUrl + "/querypara") 
+  }
+
   // get filtering data
   searchKeyWord(keyword, jobdiscipline, joblocation, jobtype, pageSize) {
     return this.http.get<any>(this.baseUrl + "/findjobs?" + "key_word=" + keyword + "&job_discipline=" + jobdiscipline + "&job_location=" + joblocation + "&job_type=" + jobtype + "&page=" + pageSize)

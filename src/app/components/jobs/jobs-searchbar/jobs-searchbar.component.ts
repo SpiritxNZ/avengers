@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
+import { ContentService } from '../../../services/http/content.service'
 import { StoreValueService } from '../../../services/storevalue/storevalue.service';
 import { Router } from '@angular/router';
 
@@ -9,6 +10,9 @@ import { Router } from '@angular/router';
   styleUrls: ['./jobs-searchbar.component.css']
 })
 export class JobsSearchbarComponent implements OnInit {
+  public jobDis: any;
+  public jobLoc: any;
+  public jobType: any;
   public searchRes: any;
   public keyword = "";
   public industryId = "";
@@ -17,12 +21,27 @@ export class JobsSearchbarComponent implements OnInit {
   public queryParams: object = {};
 
   constructor(
+    private contentService: ContentService,
     private storeValueService: StoreValueService,
     private router: Router    
   ) { }
 
   ngOnInit() {
+    this.getDropDown();
+  }
 
+  getDropDown(){
+    this.contentService.dropDownItems().subscribe(
+      (res) => {
+        this.jobDis = res.dataCon.job_discipline;
+        this.jobLoc = res.dataCon.job_location;
+        this.jobType = res.dataCon.job_type;
+        console.log(res.dataCon);
+      },
+      (err) => {
+        console.log(err)
+      }
+    )
   }
 
   // get searching results by limited conditions, and 
