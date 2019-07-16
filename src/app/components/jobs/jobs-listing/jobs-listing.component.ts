@@ -17,11 +17,11 @@ export class JobsListingComponent implements OnInit {
   public jobLists: any;
   public resultsLength = 0;
   public lengthTotal: any;
-  public keyword: any;
-  public industry: any;
-  public location: any;
-  public type: any;
-  public currentPage: number = 1;
+  public keyword = '';
+  public industry = '';
+  public location = '';
+  public type = '';
+  public currentPage = 1;
 
   constructor(
     private contentservice: ContentService,
@@ -30,7 +30,8 @@ export class JobsListingComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.getMessage();
+    this.getMessage();  
+    this.refreshPageControl();  
   }
 
   // Get searching results from Search Bar
@@ -41,12 +42,11 @@ export class JobsListingComponent implements OnInit {
         this.industry = res.industry;
         this.location = res.location;
         this.type = res.type;
-        this.contentservice.searchKeyWord(res.keyword, res.industry, res.location, res.type, 1).subscribe(
-          (act) => {            
+        this.contentservice.searchKeyWord(res.keyword, res.industry, res.location, res.type, this.currentPage).subscribe(
+          (act) => {
             this.jobLists = act.data;
             this.lengthTotal = act.total;
-            // console.log(this.jobLists);
-            // this.refreshPageControl();
+            this.storeValueService.setQueryParams('page', act.current_page)
           }
         );
       },
@@ -67,15 +67,36 @@ export class JobsListingComponent implements OnInit {
         this.jobLists = res.data;
         // everytime paginating the content goes back top
         document.getElementById("jobslist").scrollTop = 0;
+        // this.currentPage = event.pageIndex + 1;
+        this.storeValueService.setQueryParams('page', event.pageIndex + 1)
       }
     )
   }
 
   refreshPageControl() {
     this.activatedRoute.queryParams.subscribe(res => {
-      let { searchString, searchBy, disciplineNum, disciplineBy, locationNum, locationBy, typeNum, typeBy } = res;
-      
+      if(res.searchString!==undefined){
+        this.keyword = res.searchString;
+      }
+      if(res.disciplineNum!==undefined){
+        this.industry = res.disciplineNum;
+      }
+      if(res.locationNum!==undefined){
+        this.location = res.locationNum;
+      }
+      if(res.typeNum!==undefined){
+        this.type = res.typeNum;
+      }      
+      if(res.page!==undefined){
+        this.currentPage = res.page;
+      }
+      // this.currentPage = res.page;
+      this.contentservice.searchKeyWord(this.keyword, this.industry, this.location, this.type, this.currentPage).subscribe(
+        (act) => {
+          this.jobLists = act.data;
+          this.lengthTotal = act.total;
+        }
+      );
     })
-    return;
   }
 }
