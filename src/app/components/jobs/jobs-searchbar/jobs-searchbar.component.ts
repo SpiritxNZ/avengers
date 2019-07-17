@@ -98,8 +98,8 @@ export class JobsSearchbarComponent implements OnInit {
   }
   backendErrorHandler(err) {
     console.warn(err)
-    if (err.error.ErrorMessage != null) {
-      this.errorMessage = err.error.ErrorMessage;
+    if (err.error.message != null) {
+      this.errorMessage = err.error.message;
     }
     else {
       this.errorMessage = "Error! Can't catch Data."

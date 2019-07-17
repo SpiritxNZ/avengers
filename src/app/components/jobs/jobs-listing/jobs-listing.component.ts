@@ -43,7 +43,7 @@ export class JobsListingComponent implements OnInit {
 
   compoHeight() {
     this.innerHeight = window.innerHeight;
-    this.listingHeight = this.innerHeight - 185
+    this.listingHeight = this.innerHeight - 185    
   }
 
   // Get searching results from Search Bar
@@ -145,8 +145,8 @@ export class JobsListingComponent implements OnInit {
   }
   backendErrorHandler(err) {
     console.warn(err)
-    if (err.error.ErrorMessage != null) {
-      this.errorMessage = err.error.ErrorMessage;
+    if (err.error.message != null) {
+      this.errorMessage = err.error.message;
     }
     else {
       this.errorMessage = "Error! Can't catch Data."

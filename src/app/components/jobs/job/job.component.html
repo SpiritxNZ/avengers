@@ -1,15 +1,24 @@
 <div class="card">
   <div class="job-detail pt-4 ph-3">
+      <div class="err-bar" *ngIf="errorMessage">
+          <h1>{{errorMessage}}</h1>
+        </div>
     <div class="job-view-layout">
-      <div class="job-detail-main-content relative" >
-        <div class="relative" id="jobcontent">
+      <div class="job-detail-main-content relative" >        
+        <div class="relative" id="jobcontent" *ngIf="!errorMessage">
           <div class="job-box">
             <div class="job-detail-top-card">
               <div class="content-container">
                 <h1 *ngIf="action">{{action.title}}</h1>
                 <div class="company-info">
-                  <span *ngIf="action && action.principal != ''">{{action.principal}}&nbsp;&middot;</span>
                   <span *ngIf="action">{{action.location_name}}</span>
+                  <span *ngIf="action" style="float: right;">
+                    <span *ngIf="action.rate_low">{{action.rate_low | currency:'CAD':'symbol-narrow':'0.0'}}</span>
+                    <span *ngIf="action.rate_low && action.rate_high"> - </span> 
+                    <span *ngIf="action.rate_high">{{action.rate_high | currency:'CAD':'symbol-narrow':'0.0'}}</span>
+                  </span><br>
+                  <span *ngIf="action && action.timeType_name != ''">{{action.timeType_name}}&nbsp;&middot;</span>
+                  <span *ngIf="action && action.principal != ''"> {{action.principal}}</span>                  
                 </div>
                 <div class="actions display-flex align-items-center">
                   <div class="job-apply" *ngIf="action">

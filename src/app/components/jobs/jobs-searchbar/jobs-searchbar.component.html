@@ -1,6 +1,6 @@
 <div class="card">
   <div class="page-content align-items-stretch row">
-    <mat-form-field class="col-2 search-bar">
+    <mat-form-field class="col-3 search-bar">
       <input matInput placeholder="Search by keywords" [(ngModel)]="keyword">
     </mat-form-field>
     <mat-form-field class="col-2">
@@ -28,13 +28,11 @@
           <mat-option value="2">Post date</mat-option>
         </mat-select>
       </mat-form-field>
-    <div class="col-2 btn-css">
+    <div class="col-1 btn-css" style="padding-left:0;">
       <button mat-raised-button color="primary" (click)="onSearch(null)">Search</button>
-      <span class="mat-icon-span">
-        <mat-icon class="mat-icon">tune</mat-icon>
-        Filter
-      </span>
     </div>
   </div>
 </div>
-<div class="err-bar" *ngIf="errorMessage">{{errorMessage}}</div>
+<div class="err-bar" *ngIf="errorMessage">
+  <h1>{{errorMessage}}</h1>
+</div>

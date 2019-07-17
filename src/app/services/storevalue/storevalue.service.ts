@@ -7,6 +7,7 @@ import { Router } from '@angular/router';
 })
 export class StoreValueService {
   public queryParams: object = {};
+
   // Data from Search bar is stored here
   public searchKeyWord = new Subject<any>();
   public getListData = this.searchKeyWord.asObservable();

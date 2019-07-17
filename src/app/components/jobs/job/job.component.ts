@@ -28,7 +28,7 @@ export class JobComponent implements OnInit {
 
   compoHeight() {
     this.innerHeight = window.innerHeight;
-    this.listingHeight = this.innerHeight - 313
+    this.listingHeight = this.innerHeight - 364
   }
 
   getJobItem() {
@@ -39,7 +39,7 @@ export class JobComponent implements OnInit {
           (res) => {
             this.descri = res.job_description[0].description;
             // when everytime refreshing this component, go to top
-            document.getElementById("jobcontent").scrollTop = 0;
+            document.getElementById("jobcontent").scrollTop = 0;            
           }
         )
       },
@@ -50,8 +50,8 @@ export class JobComponent implements OnInit {
   }
   backendErrorHandler(err) {
     console.warn(err)
-    if (err.error.ErrorMessage != null) {
-      this.errorMessage = err.error.ErrorMessage;
+    if (err.error.message != null) {
+      this.errorMessage = err.error.message;
     }
     else {
       this.errorMessage = "Error! Can't catch Data."
@@ -72,12 +72,15 @@ export class JobComponent implements OnInit {
                     this.descri = res.job_description[0].description;
                     // when everytime refreshing this component, go to top
                     document.getElementById("jobcontent").scrollTop = 0;
+                  },
+                  (err) => {
+                    this.errorMessage = err.error.message
                   }
                 )
                 break;
               }
-              // idArr[i] = act[i].id;
             }
+            delete this.errorMessage;
           }
         )
       }
