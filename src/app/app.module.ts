@@ -14,6 +14,7 @@ import { NavbarComponent } from './components/general/navbar/navbar.component';
 import { FooterComponent } from './components/general/footer/footer.component';
 import { JobComponent } from './components/jobs/job/job.component';
 import { TestComponent } from './components/test/test.component';
+import { DemoComponent } from './demo/demo.component';
 
 
 @NgModule({
@@ -26,6 +27,7 @@ import { TestComponent } from './components/test/test.component';
     FooterComponent,
     JobComponent,
     TestComponent,
+    DemoComponent,
   ],
   imports: [
     BrowserModule,

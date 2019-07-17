@@ -1,0 +1,23 @@
+<div class="container"><br><br>
+<div   class="baseContainer">
+    This area is the navbar
+    <div class="row">
+        <div class="col-xs-12 col-md-6">
+            <div class="left-container">
+                <div class="card">
+                    <div class="card-header">
+                        Card header
+                    </div>
+                    <div *ngIf="datas" [ngStyle]="{'height.px': listingHeight}" style="overflow-y: scroll;" class="card-body">
+                        <div *ngFor="let data of datas" class="listing">
+                            {{data.discipline_name}} <br>
+                            <hr>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <br>
+</div>
+</div>
