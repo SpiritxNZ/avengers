@@ -1,6 +1,15 @@
-.scrolly{
+.scrolly {
   height: 50rem;
-  overflow:auto; 
+  overflow: auto;
+}
+
+.err-bar {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  height: 100px;
+  margin-left: -100px;
+  margin-top: -50px;
 }
 
 .job-item {
@@ -47,12 +56,15 @@ p {
   padding-top: 0.5rem;
   padding-bottom: 0.5rem;
 }
-h3{
+
+h3 {
   cursor: pointer;
 }
+
 h3:hover {
   color: blueviolet !important;
 }
+
 h3:active {
   color: green !important;
 }

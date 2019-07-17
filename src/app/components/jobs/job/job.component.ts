@@ -11,6 +11,7 @@ import { StoreValueService } from '../../../services/storevalue/storevalue.servi
 export class JobComponent implements OnInit {
   public action: any;
   public descri: any;
+  public errorMessage: any;
 
   constructor(
     private storeValueService: StoreValueService,
@@ -31,7 +32,19 @@ export class JobComponent implements OnInit {
             document.getElementById("jobcontent").scrollTop = 0;          
           }
         )                
+      },
+      (err) => {
+        this.backendErrorHandler(err);
       }
     );
+  }
+  backendErrorHandler(err) {
+    console.warn(err)
+    if (err.error.ErrorMessage != null) {
+      this.errorMessage = err.error.ErrorMessage;
+    }
+    else {
+      this.errorMessage = "Error! Can't catch Data."
+    }
   }
 }

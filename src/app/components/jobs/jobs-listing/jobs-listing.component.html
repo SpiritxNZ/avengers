@@ -13,8 +13,12 @@
     </div>
   </div>
   <div class="scrolly" >
+    <div class="err-bar" *ngIf="errorMessage">
+      <h1>{{errorMessage}}</h1>
+    </div>
+    <div *ngIf="!errorMessage">
     <ul *ngIf="jobLists" id="jobslist">
-      <li *ngFor="let i of jobLists">
+      <li *ngFor="let i of jobLists" (click)="sendMessage(i)">
         <div class="job-item">
           <div class="company-content">
             <div class="company-content-brief">
@@ -29,5 +33,6 @@
       </li>
       <mat-paginator (page)="getPage($event)" [length]="lengthTotal" [pageSize]="20" [pageIndex]="pagesIndex"></mat-paginator>
     </ul>
+    </div>
   </div>
 </div>

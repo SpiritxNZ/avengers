@@ -22,18 +22,19 @@ export class JobsListingComponent implements OnInit {
   public location = '';
   public type = '';
   public currentPage = 1;
+  public errorMessage: any;
 
-  public pagesIndex:any;
+  public pagesIndex: any;
 
   constructor(
     private contentservice: ContentService,
     private storeValueService: StoreValueService,
     private activatedRoute: ActivatedRoute
-  ) {}
+  ) { }
 
   ngOnInit() {
-    this.getMessage();  
-    this.refreshPageControl();  
+    this.getMessage();
+    this.refreshPageControl();
   }
 
   // Get searching results from Search Bar
@@ -46,14 +47,18 @@ export class JobsListingComponent implements OnInit {
         this.type = res.type;
         this.contentservice.searchKeyWord(res.keyword, res.industry, res.location, res.type, 1).subscribe(
           (act) => {
+            if (JSON.stringify(act.data) !== "[]" && act !== undefined) {
             this.jobLists = act.data;
             this.lengthTotal = act.total;
-            this.storeValueService.setQueryParams('page', act.current_page);            
+            this.storeValueService.setQueryParams('page', act.current_page);
+            } else {
+              this.errorMessage = "Error! Can't catch Data.";
+            }
           }
         );
       },
       (err) => {
-        console.log(err);
+        this.backendErrorHandler(err);
       }
     )
   }
@@ -70,40 +75,61 @@ export class JobsListingComponent implements OnInit {
         // everytime paginating the content goes back top
         document.getElementById("jobslist").scrollTop = 0;
         // this.currentPage = event.pageIndex + 1;
-        this.storeValueService.setQueryParams('searchString', this.keyword);   
+        this.storeValueService.setQueryParams('searchString', this.keyword);
         this.storeValueService.setQueryParams('disciplineNum', this.industry);
         this.storeValueService.setQueryParams('locationNum', this.location);
         this.storeValueService.setQueryParams('typeNum', this.type);
         this.storeValueService.setQueryParams('page', event.pageIndex + 1)
+      },
+      (err) => {
+        this.backendErrorHandler(err);
       }
     )
   }
 
   refreshPageControl() {
-    this.activatedRoute.queryParams.subscribe(res => {
-      if(res.searchString!==undefined){
-        this.keyword = res.searchString;
-      }
-      if(res.disciplineNum!==undefined){
-        this.industry = res.disciplineNum;
-      }
-      if(res.locationNum!==undefined){
-        this.location = res.locationNum;
-      }
-      if(res.typeNum!==undefined){
-        this.type = res.typeNum;
-      }      
-      if(res.page!==undefined){
-        this.currentPage = res.page;
-      }
-      // this.currentPage = res.page;
-      this.contentservice.searchKeyWord(this.keyword, this.industry, this.location, this.type, this.currentPage).subscribe(
-        (act) => {
-          this.jobLists = act.data;
-          this.lengthTotal = act.total;
-          this.pagesIndex = act.current_page - 1;
+    this.activatedRoute.queryParams.subscribe(
+      (res) => {
+        if (res.searchString !== undefined) {
+          this.keyword = res.searchString;
         }
-      );
-    })
+        if (res.disciplineNum !== undefined) {
+          this.industry = res.disciplineNum;
+        }
+        if (res.locationNum !== undefined) {
+          this.location = res.locationNum;
+        }
+        if (res.typeNum !== undefined) {
+          this.type = res.typeNum;
+        }
+        if (res.page !== undefined) {
+          this.currentPage = res.page;
+        }
+        // this.currentPage = res.page;
+        this.contentservice.searchKeyWord(this.keyword, this.industry, this.location, this.type, this.currentPage).subscribe(
+          (act) => {
+            if(JSON.stringify(act.data) !== "[]" && act !== undefined){
+              this.jobLists = act.data;
+              this.lengthTotal = act.total;
+              this.pagesIndex = act.current_page - 1;
+            } else {
+              this.errorMessage = "Error! Can't catch Data."
+            }                        
+          }
+        );
+      },
+      (err) => {
+        this.backendErrorHandler(err);
+      }
+    )
+  }
+  backendErrorHandler(err) {
+    console.warn(err)
+    if (err.error.ErrorMessage != null) {
+      this.errorMessage = err.error.ErrorMessage;
+    }
+    else {
+      this.errorMessage = "Error! Can't catch Data."
+    }
   }
 }

@@ -19,6 +19,7 @@ export class JobsSearchbarComponent implements OnInit {
   public locationId = "";
   public typeId = "";
   public queryParams: object = {};
+  public errorMessage: any;
 
   constructor(
     private contentService: ContentService,
@@ -34,12 +35,17 @@ export class JobsSearchbarComponent implements OnInit {
   getDropDown() {
     this.contentService.dropDownItems().subscribe(
       (res) => {
-        this.jobDis = res.dataCon.job_discipline;
-        this.jobLoc = res.dataCon.job_location;
-        this.jobType = res.dataCon.job_type;
+        let asd = {}
+        if (JSON.stringify(res.dataCon) !== "{}" && res.dataCon !== undefined) {
+          this.jobDis = res.dataCon.job_discipline;
+          this.jobLoc = res.dataCon.job_location;
+          this.jobType = res.dataCon.job_type;
+        } else {
+          this.errorMessage = "Error! Can't catch Data."
+        }
       },
       (err) => {
-        console.log(err)
+        this.backendErrorHandler(err);
       }
     )
   }
@@ -71,19 +77,31 @@ export class JobsSearchbarComponent implements OnInit {
   refreshPageControl() {
     this.activatedRoute.queryParams.subscribe(
       (res) => {
-        if(res.searchString!==undefined){
+        if (res.searchString !== undefined) {
           this.keyword = res.searchString;
         }
-        if(res.disciplineNum!==undefined){
+        if (res.disciplineNum !== undefined) {
           this.industryId = res.disciplineNum;
         }
-        if(res.locationNum!==undefined){
+        if (res.locationNum !== undefined) {
           this.locationId = res.locationNum;
         }
-        if(res.typeNum!==undefined){
+        if (res.typeNum !== undefined) {
           this.typeId = res.typeNum;
-        }      
+        }
+      },
+      (err) => {
+        this.backendErrorHandler(err);
       }
     )
+  }
+  backendErrorHandler(err) {
+    console.warn(err)
+    if (err.error.ErrorMessage != null) {
+      this.errorMessage = err.error.ErrorMessage;
+    }
+    else {
+      this.errorMessage = "Error! Can't catch Data."
+    }
   }
 }
