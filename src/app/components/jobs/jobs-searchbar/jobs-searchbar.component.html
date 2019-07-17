@@ -1,9 +1,9 @@
 <div class="card">
   <div class="page-content align-items-stretch row">
-    <mat-form-field class="col-3 search-bar">
+    <mat-form-field class="col-2 search-bar">
       <input matInput placeholder="Search by keywords" [(ngModel)]="keyword">
     </mat-form-field>
-    <mat-form-field class="col-3">
+    <mat-form-field class="col-2">
       <mat-label>Industries</mat-label>
       <mat-select [(ngModel)]="industryId">
         <mat-option *ngFor="let i of jobDis" value="{{i.discipline_num}}">{{i.discipline_name}}</mat-option>
@@ -21,6 +21,13 @@
         <mat-option *ngFor="let i of jobType" value="{{i.type_num}}">{{i.type_name}}</mat-option>
       </mat-select>
     </mat-form-field>
+    <mat-form-field class="col-2">
+        <mat-label>Sort by</mat-label>
+        <mat-select [(ngModel)]="sortId">
+          <mat-option value="1">Relevance</mat-option>
+          <mat-option value="2">Post date</mat-option>
+        </mat-select>
+      </mat-form-field>
     <div class="col-2 btn-css">
       <button mat-raised-button color="primary" (click)="onSearch(null)">Search</button>
       <span class="mat-icon-span">
@@ -30,12 +37,3 @@
     </div>
   </div>
 </div>
-<div class="sordby-bar">
-    <mat-form-field class="font-12">
-      <mat-label>Sord by</mat-label>
-      <select matNativeControl required>
-        <option value="relevance">Relevance</option>
-        <option value="postdate">Post date</option>
-      </select>
-    </mat-form-field>
-  </div>

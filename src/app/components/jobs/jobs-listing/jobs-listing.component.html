@@ -27,7 +27,7 @@
           </div>
         </div>
       </li>
-      <mat-paginator (page)="getPage($event)" [length]="lengthTotal" [pageSize]="20"></mat-paginator>
+      <mat-paginator (page)="getPage($event)" [length]="lengthTotal" [pageSize]="20" [pageIndex]="pagesIndex"></mat-paginator>
     </ul>
   </div>
 </div>

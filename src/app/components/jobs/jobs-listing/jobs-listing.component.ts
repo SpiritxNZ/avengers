@@ -23,7 +23,7 @@ export class JobsListingComponent implements OnInit {
   public type = '';
   public currentPage = 1;
 
-  public abc:number;
+  public pagesIndex:any;
 
   constructor(
     private contentservice: ContentService,
@@ -34,7 +34,6 @@ export class JobsListingComponent implements OnInit {
   ngOnInit() {
     this.getMessage();  
     this.refreshPageControl();  
-    
   }
 
   // Get searching results from Search Bar
@@ -49,7 +48,7 @@ export class JobsListingComponent implements OnInit {
           (act) => {
             this.jobLists = act.data;
             this.lengthTotal = act.total;
-            this.storeValueService.setQueryParams('page', act.current_page);
+            this.storeValueService.setQueryParams('page', act.current_page);            
           }
         );
       },
@@ -102,6 +101,7 @@ export class JobsListingComponent implements OnInit {
         (act) => {
           this.jobLists = act.data;
           this.lengthTotal = act.total;
+          this.pagesIndex = act.current_page - 1;
         }
       );
     })
