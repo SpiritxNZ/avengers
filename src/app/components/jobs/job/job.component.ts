@@ -59,24 +59,27 @@ export class JobComponent implements OnInit {
   }
 
   refreshPageControl() {
+    let idArr = [];
     this.storeValueService.getid.subscribe(
       (res) => {
-        // this.contentservice.jobdescri(res).subscribe(
-        //   (res) => {
-        //     this.descri = res.job_description[0].description;
-        //     // when everytime refreshing this component, go to top
-        //     document.getElementById("jobcontent").scrollTop = 0;
-        //   }
-        // )
-        // for(var i = 0; i <= res['length']; i++){
-
-        // }
-        // this.storeValueService.getRefresh.subscribe(
-        //   (act) => {
-
-        //   }
-        // )
-        console.log(res)
+        this.storeValueService.getRefresh.subscribe(
+          (act) => {
+            for (var i = 0; i <= act['length']; i++) {
+              if (act[i].id == res) {
+                this.action = act[i];
+                this.contentservice.jobdescri(res).subscribe(
+                  (res) => {
+                    this.descri = res.job_description[0].description;
+                    // when everytime refreshing this component, go to top
+                    document.getElementById("jobcontent").scrollTop = 0;
+                  }
+                )
+                break;
+              }
+              // idArr[i] = act[i].id;
+            }
+          }
+        )
       }
     )
   }
