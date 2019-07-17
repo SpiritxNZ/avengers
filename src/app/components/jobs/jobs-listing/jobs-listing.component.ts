@@ -23,15 +23,18 @@ export class JobsListingComponent implements OnInit {
   public type = '';
   public currentPage = 1;
 
+  public abc:number;
+
   constructor(
     private contentservice: ContentService,
     private storeValueService: StoreValueService,
     private activatedRoute: ActivatedRoute
-  ) { }
+  ) {}
 
   ngOnInit() {
     this.getMessage();  
     this.refreshPageControl();  
+    
   }
 
   // Get searching results from Search Bar
@@ -42,11 +45,11 @@ export class JobsListingComponent implements OnInit {
         this.industry = res.industry;
         this.location = res.location;
         this.type = res.type;
-        this.contentservice.searchKeyWord(res.keyword, res.industry, res.location, res.type, this.currentPage).subscribe(
+        this.contentservice.searchKeyWord(res.keyword, res.industry, res.location, res.type, 1).subscribe(
           (act) => {
             this.jobLists = act.data;
             this.lengthTotal = act.total;
-            this.storeValueService.setQueryParams('page', act.current_page)
+            this.storeValueService.setQueryParams('page', act.current_page);
           }
         );
       },
@@ -68,6 +71,10 @@ export class JobsListingComponent implements OnInit {
         // everytime paginating the content goes back top
         document.getElementById("jobslist").scrollTop = 0;
         // this.currentPage = event.pageIndex + 1;
+        this.storeValueService.setQueryParams('searchString', this.keyword);   
+        this.storeValueService.setQueryParams('disciplineNum', this.industry);
+        this.storeValueService.setQueryParams('locationNum', this.location);
+        this.storeValueService.setQueryParams('typeNum', this.type);
         this.storeValueService.setQueryParams('page', event.pageIndex + 1)
       }
     )

@@ -6,13 +6,14 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./jobs-panel.component.css']
 })
 export class JobsPanelComponent implements OnInit {
-  
 
   public bodyHeight = window.innerHeight;
 
   constructor(
-  ) { }  
+  ) { 
+  }  
 
   ngOnInit() {
+    // console.log(document.getElementById('filterbar').offsetHeight);
   }
 }

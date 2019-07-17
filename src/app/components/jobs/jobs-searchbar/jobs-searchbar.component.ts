@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 
 import { ContentService } from '../../../services/http/content.service'
 import { StoreValueService } from '../../../services/storevalue/storevalue.service';
-import { Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-jobs-searchbar',
@@ -23,11 +23,12 @@ export class JobsSearchbarComponent implements OnInit {
   constructor(
     private contentService: ContentService,
     private storeValueService: StoreValueService,
-    private router: Router
+    private activatedRoute: ActivatedRoute
   ) { }
 
   ngOnInit() {
     this.getDropDown();
+    this.refreshPageControl();
   }
 
   getDropDown() {
@@ -36,7 +37,6 @@ export class JobsSearchbarComponent implements OnInit {
         this.jobDis = res.dataCon.job_discipline;
         this.jobLoc = res.dataCon.job_location;
         this.jobType = res.dataCon.job_type;
-        // console.log(res.dataCon);
       },
       (err) => {
         console.log(err)
@@ -66,5 +66,24 @@ export class JobsSearchbarComponent implements OnInit {
     };
     // console.log(obj)
     this.storeValueService.searchKeyWord.next(obj);
+  }
+
+  refreshPageControl() {
+    this.activatedRoute.queryParams.subscribe(
+      (res) => {
+        if(res.searchString!==undefined){
+          this.keyword = res.searchString;
+        }
+        if(res.disciplineNum!==undefined){
+          this.industryId = res.disciplineNum;
+        }
+        if(res.locationNum!==undefined){
+          this.locationId = res.locationNum;
+        }
+        if(res.typeNum!==undefined){
+          this.typeId = res.typeNum;
+        }      
+      }
+    )
   }
 }

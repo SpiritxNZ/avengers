@@ -1,7 +1,6 @@
 .job-detail {
-  overflow-x: hidden;
-  overflow-y: auto;
-  width: 100%;
+  height: 54rem;
+  overflow:auto; 
 }
 
 .job-detail-main-content {

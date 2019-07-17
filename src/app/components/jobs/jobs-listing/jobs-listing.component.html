@@ -1,13 +1,18 @@
 <div class="card">
   <div class="job-list-header">
     <div class="header-first">
-      {{keyword}} in New Zealand
+      <div *ngIf="!keyword">
+        All Jobs in New Zealand
+      </div>
+      <div *ngIf="keyword">
+        {{keyword}} in New Zealand
+      </div>
       <div class="font-mini" *ngIf="lengthTotal">
         {{lengthTotal}} results
       </div>
     </div>
   </div>
-  <div class="scrolly">
+  <div class="scrolly" >
     <ul *ngIf="jobLists" id="jobslist">
       <li *ngFor="let i of jobLists">
         <div class="job-item">
@@ -22,8 +27,7 @@
           </div>
         </div>
       </li>
+      <mat-paginator (page)="getPage($event)" [length]="lengthTotal" [pageSize]="20"></mat-paginator>
     </ul>
   </div>
-  <mat-paginator (page)="getPage($event)" [length]="lengthTotal" [pageSize]="20" *ngIf="jobLists"></mat-paginator>
-
 </div>

@@ -1,24 +1,16 @@
-<app-navbar></app-navbar>
-<section class="main-content container" [ngStyle]="{'max-height.px': bodyHeight}">
-  <div class="filter-holder">
-    <app-jobs-searchbar></app-jobs-searchbar>
-  </div>
-  <div class="sordby-bar">
-    <mat-form-field class="font-12">
-      <mat-label>Sord by</mat-label>
-      <select matNativeControl required>
-        <option value="relevance">Relevance</option>
-        <option value="postdate">Post date</option>
-      </select>
-    </mat-form-field>
-  </div>
-  <div class="row">
-    <div id="job-list-left" class="col-6">
-      <app-jobs-listing></app-jobs-listing>
+<div [ngStyle]="{'height.px': bodyHeight}">
+  <app-navbar></app-navbar>
+  <section class="main-content container">
+    <div class="filter-holder">
+      <app-jobs-searchbar></app-jobs-searchbar>
     </div>
-    <div id="job-list-right" class="col-6">
-      <app-job></app-job>
+    <div class="row">
+      <div id="job-list-left" class="col-6">
+        <app-jobs-listing></app-jobs-listing>
+      </div>
+      <div id="job-list-right" class="col-6">
+        <app-job></app-job>
+      </div>
     </div>
-  </div>
-</section>
-<app-footer></app-footer>
+  </section>
+</div>
