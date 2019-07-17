@@ -15,7 +15,15 @@ export class StoreValueService {
   public jobListToJob = new Subject();
   public getJob = this.jobListToJob.asObservable();
 
-  constructor(private router: Router ) {  }
+
+  public refreshId = new Subject();
+  public getRefresh = this.refreshId.asObservable(); 
+
+  public jobItemId = new Subject();
+  public getid = this.jobItemId.asObservable();
+
+  constructor(private router: Router ) { 
+   }
 
 
   setQueryParams(paraName, paraValue) {

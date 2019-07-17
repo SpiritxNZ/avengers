@@ -40,6 +40,7 @@ export class JobsSearchbarComponent implements OnInit {
           this.jobDis = res.dataCon.job_discipline;
           this.jobLoc = res.dataCon.job_location;
           this.jobType = res.dataCon.job_type;
+          delete this.errorMessage;
         } else {
           this.errorMessage = "Error! Can't catch Data."
         }

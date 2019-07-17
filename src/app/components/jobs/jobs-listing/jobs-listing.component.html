@@ -12,7 +12,7 @@
       </div>
     </div>
   </div>
-  <div class="scrolly" >
+  <div class="scrolly" [ngStyle]="{'height.px': listingHeight}">
     <div class="err-bar" *ngIf="errorMessage">
       <h1>{{errorMessage}}</h1>
     </div>

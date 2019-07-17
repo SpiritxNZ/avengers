@@ -23,6 +23,9 @@ export class JobsListingComponent implements OnInit {
   public type = '';
   public currentPage = 1;
   public errorMessage: any;
+  public innerHeight: any
+  public listingHeight: any
+  public itemId: any;
 
   public pagesIndex: any;
 
@@ -35,6 +38,12 @@ export class JobsListingComponent implements OnInit {
   ngOnInit() {
     this.getMessage();
     this.refreshPageControl();
+    this.compoHeight();
+  }
+
+  compoHeight() {
+    this.innerHeight = window.innerHeight;
+    this.listingHeight = this.innerHeight - 185
   }
 
   // Get searching results from Search Bar
@@ -48,11 +57,12 @@ export class JobsListingComponent implements OnInit {
         this.contentservice.searchKeyWord(res.keyword, res.industry, res.location, res.type, 1).subscribe(
           (act) => {
             if (JSON.stringify(act.data) !== "[]" && act !== undefined) {
-            this.jobLists = act.data;
-            this.lengthTotal = act.total;
-            this.storeValueService.setQueryParams('page', act.current_page);
+              this.jobLists = act.data;
+              this.lengthTotal = act.total;
+              this.storeValueService.setQueryParams('page', act.current_page);
+              delete this.errorMessage;
             } else {
-              this.errorMessage = "Error! Can't catch Data.";
+              this.errorMessage = "Error! Can't catch Data.123";
             }
           }
         );
@@ -65,6 +75,12 @@ export class JobsListingComponent implements OnInit {
   //sent info to a service
   sendMessage(act) {
     this.storeValueService.jobListToJob.next(act);
+    this.storeValueService.setQueryParams('searchString', this.keyword);
+    this.storeValueService.setQueryParams('disciplineNum', this.industry);
+    this.storeValueService.setQueryParams('locationNum', this.location);
+    this.storeValueService.setQueryParams('typeNum', this.type);
+    this.storeValueService.setQueryParams('page', this.currentPage);
+    this.storeValueService.setQueryParams('itemId', act.id);
   }
 
   // when click previous or next page, call the following function.
@@ -104,17 +120,21 @@ export class JobsListingComponent implements OnInit {
         }
         if (res.page !== undefined) {
           this.currentPage = res.page;
-        }
+        }        
         // this.currentPage = res.page;
         this.contentservice.searchKeyWord(this.keyword, this.industry, this.location, this.type, this.currentPage).subscribe(
           (act) => {
-            if(JSON.stringify(act.data) !== "[]" && act !== undefined){
+            if (JSON.stringify(act.data) !== "[]" && act !== undefined) {
               this.jobLists = act.data;
               this.lengthTotal = act.total;
               this.pagesIndex = act.current_page - 1;
-            } else {
-              this.errorMessage = "Error! Can't catch Data."
-            }                        
+              if(res.itemId !== undefined) {
+                this.storeValueService.jobItemId.next(res.itemId)
+                this.storeValueService.refreshId.next(act.data)
+              }
+            } else if (!this.errorMessage) {
+              this.errorMessage = "Error! Can't catch Data.321"
+            }
           }
         );
       },

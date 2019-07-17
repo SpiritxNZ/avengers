@@ -1,4 +1,4 @@
-import { Component, OnInit} from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
 import { ContentService } from '../../../services/http/content.service'
 import { StoreValueService } from '../../../services/storevalue/storevalue.service';
@@ -12,6 +12,8 @@ export class JobComponent implements OnInit {
   public action: any;
   public descri: any;
   public errorMessage: any;
+  public innerHeight: any
+  public listingHeight: any
 
   constructor(
     private storeValueService: StoreValueService,
@@ -20,18 +22,26 @@ export class JobComponent implements OnInit {
 
   ngOnInit() {
     this.getJobItem();
+    this.compoHeight();
+    this.refreshPageControl();
   }
+
+  compoHeight() {
+    this.innerHeight = window.innerHeight;
+    this.listingHeight = this.innerHeight - 313
+  }
+
   getJobItem() {
     this.storeValueService.getJob.subscribe(
       (action) => {
-        this.action = action;                
+        this.action = action;
         this.contentservice.jobdescri(action['id']).subscribe(
           (res) => {
-            this.descri = res.job_description[0].description;   
+            this.descri = res.job_description[0].description;
             // when everytime refreshing this component, go to top
-            document.getElementById("jobcontent").scrollTop = 0;          
+            document.getElementById("jobcontent").scrollTop = 0;
           }
-        )                
+        )
       },
       (err) => {
         this.backendErrorHandler(err);
@@ -46,5 +56,28 @@ export class JobComponent implements OnInit {
     else {
       this.errorMessage = "Error! Can't catch Data."
     }
+  }
+
+  refreshPageControl() {
+    this.storeValueService.getid.subscribe(
+      (res) => {
+        // this.contentservice.jobdescri(res).subscribe(
+        //   (res) => {
+        //     this.descri = res.job_description[0].description;
+        //     // when everytime refreshing this component, go to top
+        //     document.getElementById("jobcontent").scrollTop = 0;
+        //   }
+        // )
+        // for(var i = 0; i <= res['length']; i++){
+
+        // }
+        // this.storeValueService.getRefresh.subscribe(
+        //   (act) => {
+
+        //   }
+        // )
+        console.log(res)
+      }
+    )
   }
 }

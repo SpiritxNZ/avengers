@@ -1,5 +1,5 @@
 <div class="card">
-  <div class="job-detail pt-4 ph-3" id="jobcontent">
+  <div class="job-detail pt-4 ph-3">
     <div class="job-view-layout">
       <div class="job-detail-main-content relative" >
         <div class="relative" id="jobcontent">
@@ -23,7 +23,7 @@
               </div>
             </div>
           </div>
-          <article>
+          <article [ngStyle]="{'height.px': listingHeight}" style="overflow-y: auto">
             <div [innerHTML]="descri" *ngIf="descri" style="padding:3rem;"></div>
           </article>
         </div>
