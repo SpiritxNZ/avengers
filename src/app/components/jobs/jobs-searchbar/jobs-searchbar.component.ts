@@ -51,7 +51,7 @@ export class JobsSearchbarComponent implements OnInit {
     )
   }
 
-  // get searching results by limited conditions, and 
+  // get searching results by limited conditions 
   onSearch(event) {
     if (event !== null && !(event.type == "keydown" && event.key == "Enter")) {
       return;
@@ -63,18 +63,21 @@ export class JobsSearchbarComponent implements OnInit {
     this.storeValueService.setQueryParams('searchString', searchString);
     this.storeValueService.setQueryParams('disciplineNum', disciplineId);
     this.storeValueService.setQueryParams('locationNum', locationId);
-    this.storeValueService.setQueryParams('typeNum', typeId);
+    this.storeValueService.setQueryParams('typeNum', typeId);        
+    this.storeValueService.setQueryParams('page', 1);
 
     let obj = {
       keyword: this.keyword,
       industry: this.industryId,
       location: this.locationId,
-      type: this.typeId
+      type: this.typeId,
+      page: 1
     };
     // console.log(obj)
-    this.storeValueService.searchKeyWord.next(obj);
+    // this.storeValueService.searchKeyWord.next(obj);
   }
 
+  // For Two-way data binding
   refreshPageControl() {
     this.activatedRoute.queryParams.subscribe(
       (res) => {

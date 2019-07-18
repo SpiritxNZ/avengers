@@ -36,9 +36,8 @@ export class JobsListingComponent implements OnInit {
     private activatedRoute: ActivatedRoute
   ) { }
 
-  ngOnInit() {
-    this.fromSearchMessage();
-    this.refreshPageControl();
+  ngOnInit() {    
+    this.showData();
     this.compoHeight();
   }
 
@@ -47,18 +46,12 @@ export class JobsListingComponent implements OnInit {
     this.listingHeight = this.innerHeight - 185
   }
 
-  // Get results from Search Bar
-  fromSearchMessage() {
-    this.storeValueService.getListData.subscribe(
-      (res) => {
-        this.keyword = res.keyword;
-        this.industry = res.industry;
-        this.location = res.location;
-        this.type = res.type;
-        this.getData(this.keyword, this.industry, this.location, this.type, 1)
-      }
-    )
+  // Get results from Search bar or refresh the page
+  showData() {
+    this.getAddressValue();
+    this.setParams(this.keyword, this.industry, this.location, this.type);
     this.storeValueService.setQueryParams('page', this.currentPage);
+    this.storeValueService.setQueryParams('itemId', this.itemId);
   }
 
   // Get results from Pagination
@@ -70,15 +63,6 @@ export class JobsListingComponent implements OnInit {
     this.storeValueService.setQueryParams('page', event.pageIndex + 1)
   }
 
-  //Get results from refresh the page
-  refreshPageControl() {
-    this.addressValue();
-    this.getData(this.keyword, this.industry, this.location, this.type, this.currentPage)
-    this.setParams(this.keyword, this.industry, this.location, this.type);
-    this.storeValueService.setQueryParams('page', this.currentPage);
-    this.storeValueService.setQueryParams('itemId', this.itemId);
-  }
-
   //sent info to a service
   sendMessage(act) {
     this.storeValueService.jobListToJob.next(act);
@@ -87,7 +71,10 @@ export class JobsListingComponent implements OnInit {
     this.storeValueService.setQueryParams('itemId', act.id);
   }
 
-  /** public Functions area*/
+  /** 
+   * public Functions area * 
+  **/
+
   getData(keyword, industry, location, type, page) {
     this.contentservice.searchKeyWord(keyword, industry, location, type, page).subscribe(
       (res) => {
@@ -122,8 +109,9 @@ export class JobsListingComponent implements OnInit {
     }
     delete this.errorMessage;
   }
-
-  addressValue() {
+  
+  // get value from url
+  getAddressValue() {
     this.activatedRoute.queryParams.subscribe(
       (res) => {
         if (res.searchString) {
@@ -144,6 +132,7 @@ export class JobsListingComponent implements OnInit {
         if (res.itemId) {
           this.itemId = res.itemId;
         }
+        this.getData(this.keyword, this.industry, this.location, this.type, this.currentPage);
       }
     )
   }

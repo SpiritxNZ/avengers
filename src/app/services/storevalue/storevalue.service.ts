@@ -9,10 +9,6 @@ export class StoreValueService {
   public queryParams: object = {};
   public errorMessage: any;
 
-  // Data from Search bar is stored here
-  public searchKeyWord = new Subject<any>();
-  public getListData = this.searchKeyWord.asObservable();
-
   // a Data in Job List is stored here
   public jobListToJob = new Subject();
   public getJob = this.jobListToJob.asObservable();
@@ -25,8 +21,7 @@ export class StoreValueService {
 
   constructor(
     private router: Router,
-  ) {
-  }
+  ) {}
 
 
   setQueryParams(paraName, paraValue) {
