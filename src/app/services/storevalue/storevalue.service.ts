@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
-import { Router, ActivatedRoute } from '@angular/router';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -24,11 +24,12 @@ export class StoreValueService {
   ) {}
 
 
+
   setQueryParams(paraName, paraValue) {
-    if (paraValue == '') {
-      delete this.queryParams[paraName];
+    if (paraValue) {
+      this.queryParams[paraName] = paraValue;      
     } else {
-      this.queryParams[paraName] = paraValue;
+      delete this.queryParams[paraName];
     }
     this.router.navigate([''], { queryParams: this.queryParams });
   }

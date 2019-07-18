@@ -65,6 +65,7 @@ export class JobsListingComponent implements OnInit {
 
   //sent info to a service
   sendMessage(act) {
+    console.log(act)
     this.storeValueService.jobListToJob.next(act);
     this.setParams(this.keyword, this.industry, this.location, this.type);
     this.storeValueService.setQueryParams('page', this.currentPage);

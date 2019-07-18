@@ -35,7 +35,6 @@ export class JobsSearchbarComponent implements OnInit {
   getDropDown() {
     this.contentService.dropDownItems().subscribe(
       (res) => {
-        let asd = {}
         if (JSON.stringify(res.dataCon) !== "{}" && res.dataCon !== undefined) {
           this.jobDis = res.dataCon.job_discipline;
           this.jobLoc = res.dataCon.job_location;
@@ -52,29 +51,12 @@ export class JobsSearchbarComponent implements OnInit {
   }
 
   // get searching results by limited conditions 
-  onSearch(event) {
-    if (event !== null && !(event.type == "keydown" && event.key == "Enter")) {
-      return;
-    }
-    let searchString = this.keyword;
-    let disciplineId = this.industryId;
-    let locationId = this.locationId;
-    let typeId = this.typeId;
-    this.storeValueService.setQueryParams('searchString', searchString);
-    this.storeValueService.setQueryParams('disciplineNum', disciplineId);
-    this.storeValueService.setQueryParams('locationNum', locationId);
-    this.storeValueService.setQueryParams('typeNum', typeId);        
+  onSearch() {
+    this.storeValueService.setQueryParams('searchString', this.keyword);
+    this.storeValueService.setQueryParams('disciplineNum', this.industryId);
+    this.storeValueService.setQueryParams('locationNum', this.locationId);
+    this.storeValueService.setQueryParams('typeNum', this.typeId);        
     this.storeValueService.setQueryParams('page', 1);
-
-    let obj = {
-      keyword: this.keyword,
-      industry: this.industryId,
-      location: this.locationId,
-      type: this.typeId,
-      page: 1
-    };
-    // console.log(obj)
-    // this.storeValueService.searchKeyWord.next(obj);
   }
 
   // For Two-way data binding
