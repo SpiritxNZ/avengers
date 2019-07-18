@@ -78,24 +78,22 @@ export class JobsSearchbarComponent implements OnInit {
   refreshPageControl() {
     this.activatedRoute.queryParams.subscribe(
       (res) => {
-        if (res.searchString !== undefined) {
+        if (res.searchString) {
           this.keyword = res.searchString;
         }
-        if (res.disciplineNum !== undefined) {
+        if (res.disciplineNum) {
           this.industryId = res.disciplineNum;
         }
-        if (res.locationNum !== undefined) {
+        if (res.locationNum) {
           this.locationId = res.locationNum;
         }
-        if (res.typeNum !== undefined) {
+        if (res.typeNum) {
           this.typeId = res.typeNum;
         }
-      },
-      (err) => {
-        this.backendErrorHandler(err);
       }
     )
   }
+
   backendErrorHandler(err) {
     console.warn(err)
     if (err.error.message != null) {

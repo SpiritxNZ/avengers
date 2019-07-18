@@ -1,12 +1,13 @@
 import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
 })
 export class StoreValueService {
   public queryParams: object = {};
+  public errorMessage: any;
 
   // Data from Search bar is stored here
   public searchKeyWord = new Subject<any>();
@@ -16,15 +17,16 @@ export class StoreValueService {
   public jobListToJob = new Subject();
   public getJob = this.jobListToJob.asObservable();
 
-
+  // For job.component calling by value    
   public refreshId = new Subject();
-  public getRefresh = this.refreshId.asObservable(); 
-
+  public getRefresh = this.refreshId.asObservable();
   public jobItemId = new Subject();
   public getid = this.jobItemId.asObservable();
 
-  constructor(private router: Router ) { 
-   }
+  constructor(
+    private router: Router,
+  ) {
+  }
 
 
   setQueryParams(paraName, paraValue) {

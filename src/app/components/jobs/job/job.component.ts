@@ -39,7 +39,7 @@ export class JobComponent implements OnInit {
           (res) => {
             this.descri = res.job_description[0].description;
             // when everytime refreshing this component, go to top
-            document.getElementById("jobcontent").scrollTop = 0;            
+            document.getElementById("jobcontent").scrollTop = 0;
           }
         )
       },
@@ -59,7 +59,6 @@ export class JobComponent implements OnInit {
   }
 
   refreshPageControl() {
-    let idArr = [];
     this.storeValueService.getid.subscribe(
       (res) => {
         this.storeValueService.getRefresh.subscribe(
@@ -67,18 +66,18 @@ export class JobComponent implements OnInit {
             for (var i = 0; i <= act['length']; i++) {
               if (act[i].id == res) {
                 this.action = act[i];
-                this.contentservice.jobdescri(res).subscribe(
+                this.contentservice.jobdescri(act[i].id).subscribe(
                   (res) => {
                     this.descri = res.job_description[0].description;
                     // when everytime refreshing this component, go to top
-                    document.getElementById("jobcontent").scrollTop = 0;
+                    document.getElementById("jobcontent").scrollTop = 0;                    
                   },
                   (err) => {
                     this.errorMessage = err.error.message
                   }
                 )
                 break;
-              }
+              }                        
             }
             delete this.errorMessage;
           }
