@@ -18,11 +18,11 @@
     </div>
     <div *ngIf="!errorMessage">
     <ul *ngIf="jobLists" id="jobslist">
-      <li *ngFor="let i of jobLists" (click)="sendMessage(i)">
+      <li *ngFor="let i of jobLists" (click)="showData(i)">
         <div class="job-item">
           <div class="company-content">
             <div class="company-content-brief">
-              <div class="clicktittle" (click)="sendMessage(i)">
+              <div class="clicktittle" (click)="showData(i)">
                 <h3 style="color: blue"><b>{{i.title}}</b></h3>
               </div>
               <h4 *ngIf="i.principal != ''"><b>{{i.principal}}</b></h4>

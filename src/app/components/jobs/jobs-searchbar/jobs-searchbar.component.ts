@@ -35,7 +35,7 @@ export class JobsSearchbarComponent implements OnInit {
   getDropDown() {
     this.contentService.dropDownItems().subscribe(
       (res) => {
-        if (JSON.stringify(res.dataCon) !== "{}" && res.dataCon !== undefined) {
+        if (res.dataCon) {
           this.jobDis = res.dataCon.job_discipline;
           this.jobLoc = res.dataCon.job_location;
           this.jobType = res.dataCon.job_type;

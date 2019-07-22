@@ -22,10 +22,10 @@ export class JobsListingComponent implements OnInit {
   public location = '';
   public type = '';
   public currentPage = 1;
+  public itemId: any;
   public errorMessage: any;
   public innerHeight: any
   public listingHeight: any
-  public itemId: any;
   public results: any;
 
   public pagesIndex: any;
@@ -36,7 +36,7 @@ export class JobsListingComponent implements OnInit {
     private activatedRoute: ActivatedRoute
   ) { }
 
-  ngOnInit() {    
+  ngOnInit() {
     this.showData();
     this.compoHeight();
   }
@@ -44,14 +44,6 @@ export class JobsListingComponent implements OnInit {
   compoHeight() {
     this.innerHeight = window.innerHeight;
     this.listingHeight = this.innerHeight - 185
-  }
-
-  // Get results from Search bar or refresh the page
-  showData() {
-    this.getAddressValue();
-    this.setParams(this.keyword, this.industry, this.location, this.type);
-    this.storeValueService.setQueryParams('page', this.currentPage);
-    this.storeValueService.setQueryParams('itemId', this.itemId);
   }
 
   // Get results from Pagination
@@ -64,53 +56,20 @@ export class JobsListingComponent implements OnInit {
   }
 
   //sent info to a service
-  sendMessage(act) {
-    console.log(act)
-    this.storeValueService.jobListToJob.next(act);
-    this.setParams(this.keyword, this.industry, this.location, this.type);
-    this.storeValueService.setQueryParams('page', this.currentPage);
-    this.storeValueService.setQueryParams('itemId', act.id);
+  showData(act?) {
+    if (act) {
+      this.storeValueService.jobListToJob.next(act);
+      this.setParams(this.keyword, this.industry, this.location, this.type);
+      this.storeValueService.setQueryParams('page', this.currentPage);
+      this.storeValueService.setQueryParams('itemId', act.id);
+    } else {
+      this.getAddressValue();
+    }
   }
 
   /** 
    * public Functions area * 
   **/
-
-  getData(keyword, industry, location, type, page) {
-    this.contentservice.searchKeyWord(keyword, industry, location, type, page).subscribe(
-      (res) => {
-        if (JSON.stringify(res.data) !== "[]") {
-          this.getRes(res)
-        }
-      },
-      (err) => {
-        this.backendErrorHandler(err);
-      }
-    )
-  }
-
-  backendErrorHandler(err) {
-    console.warn(err)
-    if (err.error.message != null) {
-      this.errorMessage = err.error.message;
-    }
-    else {
-      this.errorMessage = "Error! Can't catch Data."
-    }
-  }
-
-  getRes(res) {
-    this.jobLists = res.data;
-    this.lengthTotal = res.total;
-    this.currentPage = res.current_page;
-    this.pagesIndex = res.current_page - 1;
-    if (this.itemId) {
-      this.storeValueService.jobItemId.next(this.itemId)
-      this.storeValueService.refreshId.next(this.jobLists)
-    }
-    delete this.errorMessage;
-  }
-  
   // get value from url
   getAddressValue() {
     this.activatedRoute.queryParams.subscribe(
@@ -138,10 +97,42 @@ export class JobsListingComponent implements OnInit {
     )
   }
 
+  getData(keyword, industry, location, type, page) {
+    this.contentservice.searchKeyWord(keyword, industry, location, type, page).subscribe(
+      (res) => {
+        if (JSON.stringify(res.data) !== "[]") {
+          this.getRes(res)
+        }
+      },
+      (err) => {
+        this.backendErrorHandler(err);
+      }
+    )
+  }
+
+  getRes(res) {
+    this.jobLists = res.data;
+    this.lengthTotal = res.total;
+    this.currentPage = res.current_page;
+    this.pagesIndex = res.current_page - 1;
+    this.storeValueService.refreshId.next(this.jobLists);
+    delete this.errorMessage;
+  }
+
   setParams(keyword, industry, location, type) {
     this.storeValueService.setQueryParams('searchString', keyword);
     this.storeValueService.setQueryParams('disciplineNum', industry);
     this.storeValueService.setQueryParams('locationNum', location);
     this.storeValueService.setQueryParams('typeNum', type);
+  }
+
+  backendErrorHandler(err) {
+    console.warn(err)
+    if (err.error.message != null) {
+      this.errorMessage = err.error.message;
+    }
+    else {
+      this.errorMessage = "Error! Can't catch Data."
+    }
   }
 }
