@@ -33,22 +33,24 @@ export class JobComponent implements OnInit {
     this.listingHeight = this.innerHeight - 364
   }
 
-  // 刷新页面或者点击传过来一个item
+  // refreshing the page or a item from jobs-list.component clicking
   refreshPage() {
     this.activatedRoute.queryParams.subscribe(
       (res) => {
         if (res.itemId) {
+          // For refreshing
           this.getJobItems(res.itemId)
         } else {
+          // For from clicking
           this.getJobItem();
         }
       }
     )
   }
 
-  // 点击传来一个item
+  // get a item from jobs-list.component clicking
   getJobItem() {
-    this.storeValueService.getJob.subscribe(
+    this.storeValueService.getItemsList.subscribe(
       (item) => {
         this.action = item;
         this.getItemDescri(item['id']);
@@ -56,9 +58,9 @@ export class JobComponent implements OnInit {
     );
   }
 
-  // Url里有Id，再在传来的items list里匹配这个id对应的item
+  // refreshing page: if there is id in URL, match an united item of the id from sent items list.
   getJobItems(itemid) {
-    this.storeValueService.getRefresh.subscribe(
+    this.storeValueService.getClickedItem.subscribe(
       (items) => {
         for (var i = 0; i <= items['length']; i++) {
           if (items[i].id == itemid) {
@@ -72,7 +74,7 @@ export class JobComponent implements OnInit {
     )
   }
 
-  // 从api里找出该id的descriptioin
+  // find descriptioin of the id out from api
   getItemDescri(id) {
     this.contentservice.jobdescri(id).subscribe(
       (res) => {

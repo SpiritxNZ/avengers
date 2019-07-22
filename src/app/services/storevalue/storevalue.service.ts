@@ -9,15 +9,13 @@ export class StoreValueService {
   public queryParams: object = {};
   public errorMessage: any;
 
-  // a Data in Job List is stored here
-  public jobListToJob = new Subject();
-  public getJob = this.jobListToJob.asObservable();
+  // sent a items list to job.component
+  public itemsList = new Subject();
+  public getItemsList = this.itemsList.asObservable();
 
-  // For job.component calling by value    
-  public refreshId = new Subject();
-  public getRefresh = this.refreshId.asObservable();
-  public jobItemId = new Subject();
-  public getid = this.jobItemId.asObservable();
+  // sent a item to job.component
+  public clickedItem = new Subject();
+  public getClickedItem = this.clickedItem.asObservable();
 
   constructor(
     private router: Router,

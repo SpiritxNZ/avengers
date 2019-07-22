@@ -46,22 +46,19 @@ export class JobsListingComponent implements OnInit {
     this.listingHeight = this.innerHeight - 185
   }
 
-  // Get results from Pagination
-  getPaging(event) {
-    this.getData(this.keyword, this.industry, this.location, this.type, event.pageIndex + 1);
-    // everytime paginating the content goes back top
-    document.getElementById("jobslist").scrollTop = 0;
-    this.setParams(this.keyword, this.industry, this.location, this.type);
-    this.storeValueService.setQueryParams('page', event.pageIndex + 1)
-  }
-
-  //sent info to a service
+  // clicking to sent infomation for job.component; refreshing page by url; paginating
   showData(act?) {
     if (act) {
-      this.storeValueService.jobListToJob.next(act);
+      if (act.id) {
+        this.storeValueService.itemsList.next(act);
+        this.storeValueService.setQueryParams('itemId', act.id);
+        this.storeValueService.setQueryParams('page', this.currentPage);
+      } else {
+        this.getData(this.keyword, this.industry, this.location, this.type, act.pageIndex + 1);
+        document.getElementById("jobslist").scrollTop = 0;
+        this.storeValueService.setQueryParams('page', act.pageIndex + 1);
+      }
       this.setParams(this.keyword, this.industry, this.location, this.type);
-      this.storeValueService.setQueryParams('page', this.currentPage);
-      this.storeValueService.setQueryParams('itemId', act.id);
     } else {
       this.getAddressValue();
     }
@@ -102,6 +99,8 @@ export class JobsListingComponent implements OnInit {
       (res) => {
         if (JSON.stringify(res.data) !== "[]") {
           this.getRes(res)
+        } else {
+          this.errorMessage = "Error! Can't catch Data.";
         }
       },
       (err) => {
@@ -115,7 +114,8 @@ export class JobsListingComponent implements OnInit {
     this.lengthTotal = res.total;
     this.currentPage = res.current_page;
     this.pagesIndex = res.current_page - 1;
-    this.storeValueService.refreshId.next(this.jobLists);
+    // 
+    this.storeValueService.clickedItem.next(this.jobLists);
     delete this.errorMessage;
   }
 

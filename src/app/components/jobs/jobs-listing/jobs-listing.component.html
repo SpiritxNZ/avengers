@@ -17,22 +17,23 @@
       <h1>{{errorMessage}}</h1>
     </div>
     <div *ngIf="!errorMessage">
-    <ul *ngIf="jobLists" id="jobslist">
-      <li *ngFor="let i of jobLists" (click)="showData(i)">
-        <div class="job-item">
-          <div class="company-content">
-            <div class="company-content-brief">
-              <div class="clicktittle" (click)="showData(i)">
-                <h3 style="color: blue"><b>{{i.title}}</b></h3>
+      <ul *ngIf="jobLists" id="jobslist">
+        <li *ngFor="let i of jobLists" (click)="showData(i)">
+          <div class="job-item">
+            <div class="company-content">
+              <div class="company-content-brief">
+                <div class="clicktittle" (click)="showData(i)">
+                  <h3 style="color: blue"><b>{{i.title}}</b></h3>
+                </div>
+                <h4 *ngIf="i.principal != ''"><b>{{i.principal}}</b></h4>
+                <h5>{{i.location_name}}, NZ</h5>
               </div>
-              <h4 *ngIf="i.principal != ''"><b>{{i.principal}}</b></h4>
-              <h5>{{i.location_name}}, NZ</h5>
             </div>
           </div>
-        </div>
-      </li>
-      <mat-paginator (page)="getPaging($event)" [length]="lengthTotal" [pageSize]="20" [pageIndex]="pagesIndex"></mat-paginator>
-    </ul>
+        </li>
+        <mat-paginator (page)="showData($event)" [length]="lengthTotal" [pageSize]="20" [pageIndex]="pagesIndex">
+        </mat-paginator>
+      </ul>
     </div>
   </div>
 </div>
