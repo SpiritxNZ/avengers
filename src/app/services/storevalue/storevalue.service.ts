@@ -13,15 +13,13 @@ export class StoreValueService {
   public itemsList = new Subject();
   public getItemsList = this.itemsList.asObservable();
 
-  // sent a item to job.component
+  // sent a item to job.component.
   public clickedItem = new Subject();
   public getClickedItem = this.clickedItem.asObservable();
 
   constructor(
     private router: Router,
   ) {}
-
-
 
   setQueryParams(paraName, paraValue) {
     if (paraValue) {

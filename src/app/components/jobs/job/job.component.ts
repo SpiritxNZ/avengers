@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 import { ContentService } from '../../../services/http/content.service'
 import { StoreValueService } from '../../../services/storevalue/storevalue.service';
@@ -20,7 +21,8 @@ export class JobComponent implements OnInit {
   constructor(
     private storeValueService: StoreValueService,
     private contentservice: ContentService,
-    private activatedRoute: ActivatedRoute
+    private activatedRoute: ActivatedRoute,
+    private router: Router
   ) { }
 
   ngOnInit() {
@@ -30,7 +32,7 @@ export class JobComponent implements OnInit {
 
   compoHeight() {
     this.innerHeight = window.innerHeight;
-    this.listingHeight = this.innerHeight - 364
+    this.listingHeight = this.innerHeight - 130
   }
 
   // refreshing the page or a item from jobs-list.component clicking
@@ -40,6 +42,7 @@ export class JobComponent implements OnInit {
         if (res.itemId) {
           // For refreshing
           this.getJobItems(res.itemId)
+
         } else {
           // For from clicking
           this.getJobItem();
@@ -62,13 +65,21 @@ export class JobComponent implements OnInit {
   getJobItems(itemid) {
     this.storeValueService.getClickedItem.subscribe(
       (items) => {
-        for (var i = 0; i <= items['length']; i++) {
-          if (items[i].id == itemid) {
+        let arr = [];
+        for (var i = 0; i < items['length']; i++) {
+          arr[i] = items[i].id
+          let setOfWords = new Set(arr);
+          if (setOfWords.has(parseInt(itemid)) && items[i].id == itemid) {
             this.action = items[i];
             this.getItemDescri(items[i].id);
             break;
+          } else if (!setOfWords.has(parseInt(itemid))) {
+            delete this.descri;
+            delete this.action;
           }
         }
+        // this.router.navigate(this.router.url, { queryParams: {}})  
+        console.log(this.activatedRoute.snapshot.queryParams)
         delete this.errorMessage;
       }
     )
