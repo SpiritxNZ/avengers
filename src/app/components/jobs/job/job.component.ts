@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router, ActivatedRouteSnapshot } from '@angular/router';
+import { Router } from '@angular/router';
 
 import { ContentService } from '../../../services/http/content.service'
 import { StoreValueService } from '../../../services/storevalue/storevalue.service';
@@ -22,8 +22,7 @@ export class JobComponent implements OnInit {
     private storeValueService: StoreValueService,
     private contentservice: ContentService,
     private activatedRoute: ActivatedRoute,
-    // private route: ActivatedRouteSnapshot,
-    // private router: Router
+    private  router: Router
   ) { }
 
   ngOnInit() {
@@ -75,10 +74,14 @@ export class JobComponent implements OnInit {
             this.getItemDescri(items[i].id);
             break;
           } else if (!setOfWords.has(parseInt(itemid))) {
-            // const params = { ...this.route.queryParams };
-            // delete params.itemId;
             delete this.descri;
             delete this.action;
+            // this.router.navigate([],{
+            //   queryParams: {
+            //     itemId: null
+            //   },
+            //   queryParamsHandling: 'merge'
+            // })
           }
         }
         // this.router.navigate(this.router.url, { queryParams: {}})  
