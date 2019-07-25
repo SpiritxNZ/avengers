@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { Subscription } from 'rxjs';
 
 import { ContentService } from '../../../services/http/content.service'
 import { StoreValueService } from '../../../services/storevalue/storevalue.service';
@@ -16,19 +17,25 @@ export class JobComponent implements OnInit {
   public errorMessage: any;
   public innerHeight: any;
   public listingHeight: any;
-  public itemId: any;
+  public itemId: any;  
+  public arr = [];
+  private subscription: Subscription;
 
   constructor(
     private storeValueService: StoreValueService,
     private contentservice: ContentService,
     private activatedRoute: ActivatedRoute,
-    private  router: Router
+    private router: Router
   ) { }
 
   ngOnInit() {
     this.compoHeight();
     this.refreshPage();
   }
+  
+  // ngOnDestroy() {
+  //   this.subscription.unsubscribe();
+  // }
 
   compoHeight() {
     this.innerHeight = window.innerHeight;
@@ -40,9 +47,9 @@ export class JobComponent implements OnInit {
     this.activatedRoute.queryParams.subscribe(
       (res) => {
         if (res.itemId) {
+          // console.log(res.itemId)
           // For refreshing
           this.getJobItems(res.itemId)
-
         } else {
           // For from clicking
           this.getJobItem();
@@ -55,6 +62,7 @@ export class JobComponent implements OnInit {
   getJobItem() {
     this.storeValueService.getItemsList.subscribe(
       (item) => {
+        // console.log(item)
         this.action = item;
         this.getItemDescri(item['id']);
       }
@@ -65,10 +73,10 @@ export class JobComponent implements OnInit {
   getJobItems(itemid) {
     this.storeValueService.getClickedItem.subscribe(
       (items) => {
-        let arr = [];
+        console.log(items)
         for (var i = 0; i < items['length']; i++) {
-          arr[i] = items[i].id
-          let setOfWords = new Set(arr);
+          this.arr[i] = items[i].id
+          let setOfWords = new Set(this.arr);
           if (setOfWords.has(parseInt(itemid)) && items[i].id == itemid) {
             this.action = items[i];
             this.getItemDescri(items[i].id);
@@ -85,7 +93,7 @@ export class JobComponent implements OnInit {
           }
         }
         // this.router.navigate(this.router.url, { queryParams: {}})  
-        console.log(this.activatedRoute.snapshot.queryParams)
+        // console.log(this.activatedRoute.snapshot.queryParams)
         delete this.errorMessage;
       }
     )

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Subject } from 'rxjs';
+import { Subject, BehaviorSubject } from 'rxjs';
 import { Router } from '@angular/router';
 
 @Injectable({
@@ -10,11 +10,11 @@ export class StoreValueService {
   public errorMessage: any;
 
   // sent a items list to job.component
-  public itemsList = new Subject();
+  public itemsList = new BehaviorSubject('');
   public getItemsList = this.itemsList.asObservable();
 
   // sent a item to job.component.
-  public clickedItem = new Subject();
+  public clickedItem = new BehaviorSubject<any>('');
   public getClickedItem = this.clickedItem.asObservable();
 
   constructor(

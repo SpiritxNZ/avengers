@@ -27,13 +27,15 @@ export class JobsListingComponent implements OnInit {
   public innerHeight: any
   public listingHeight: any
   public results: any;
+  public onOff: boolean = false;
 
   public pagesIndex: any;
 
   constructor(
     private contentservice: ContentService,
     private storeValueService: StoreValueService,
-    private activatedRoute: ActivatedRoute
+    private activatedRoute: ActivatedRoute,
+    // public debouncer: Debouncer
   ) { }
 
   ngOnInit() {
@@ -53,6 +55,9 @@ export class JobsListingComponent implements OnInit {
         this.storeValueService.itemsList.next(act);
         this.storeValueService.setQueryParams('itemId', act.id);
         this.storeValueService.setQueryParams('page', this.currentPage);
+        // this.debouncer.debounce()(() => {
+        //   this.storeValueService.itemsList.next(act);
+        // }, 1000)
       } else {
         this.getData(this.keyword, this.industry, this.location, this.type, act.pageIndex + 1);
         document.getElementById("jobslist").scrollTop = 0;
@@ -99,6 +104,7 @@ export class JobsListingComponent implements OnInit {
       (res) => {
         if (JSON.stringify(res.data) !== "[]") {
           this.getRes(res)
+          this.storeValueService.clickedItem.next(res.data);
         } else {
           this.errorMessage = "Error! Can't catch Data.";
         }
@@ -114,8 +120,6 @@ export class JobsListingComponent implements OnInit {
     this.lengthTotal = res.total;
     this.currentPage = res.current_page;
     this.pagesIndex = res.current_page - 1;
-    // 
-    this.storeValueService.clickedItem.next(this.jobLists);
     delete this.errorMessage;
   }
 

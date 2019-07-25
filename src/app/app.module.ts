@@ -14,7 +14,9 @@ import { NavbarComponent } from './components/general/navbar/navbar.component';
 import { FooterComponent } from './components/general/footer/footer.component';
 import { JobComponent } from './components/jobs/job/job.component';
 import { TestComponent } from './components/test/test.component';
-import { DemoComponent } from './demo/demo.component';
+import { JobDetailComponent } from './components/jobs/job-detail/job-detail.component';
+
+import { SanitizehtmlPipe } from './pipes/sanitizehtml.pipe';
 
 
 @NgModule({
@@ -27,7 +29,8 @@ import { DemoComponent } from './demo/demo.component';
     FooterComponent,
     JobComponent,
     TestComponent,
-    DemoComponent,
+    JobDetailComponent,
+    SanitizehtmlPipe
   ],
   imports: [
     BrowserModule,

@@ -33,7 +33,7 @@
             </div>
           </div>
           <article>
-            <div [innerHTML]="descri" *ngIf="descri" style="padding:3rem;"></div>
+            <div [innerHTML]="descri | sanitizehtml" *ngIf="descri" style="padding:3rem;"></div>
           </article>
         </div>
       </div>
