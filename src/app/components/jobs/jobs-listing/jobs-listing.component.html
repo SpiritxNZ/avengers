@@ -12,7 +12,7 @@
       </div>
     </div>
   </div>
-  <div class="scrolly" [ngStyle]="{'height.px': listingHeight}">
+  <div class="scrolly" [ngStyle]="{'height.px': listingHeight}" id="leftlist">
     <div class="err-bar" *ngIf="errorMessage">
       <h1>{{errorMessage}}</h1>
     </div>
@@ -22,7 +22,7 @@
           <div class="job-item">
             <div class="company-content">
               <div class="company-content-brief">
-                <div class="clicktittle" (click)="showData(i)">
+                <div class="clicktittle" (click)="showData(i)" (click)="onScroll($event)">
                   <h3 style="color: blue"><b>{{i.title}}</b></h3>
                 </div>
                 <h4 *ngIf="i.principal != ''"><b>{{i.principal}}</b></h4>

@@ -1,9 +1,8 @@
 import { Component, OnInit, Directive } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, ActivatedRouteSnapshot } from '@angular/router';
 
 import { ContentService } from '../../../services/http/content.service';
 import { StoreValueService } from '../../../services/storevalue/storevalue.service';
-import { Debouncer } from '../../../classes/debouncer';
 
 @Component({
   selector: 'app-jobs-listing',
@@ -33,6 +32,7 @@ export class JobsListingComponent implements OnInit {
     private contentservice: ContentService,
     private storeValueService: StoreValueService,
     private activatedRoute: ActivatedRoute,
+    // private router: ActivatedRouteSnapshot
 
   ) { }
 
@@ -46,17 +46,18 @@ export class JobsListingComponent implements OnInit {
     this.listingHeight = this.innerHeight - 185
   }
 
-  // clicking to sent infomation for job.component; refreshing page by url; paginating
+  // 把itemid和页数传到地址栏
   showData(act) {
     if (act.id) {
       this.storeValueService.setQueryParams('itemId', act.id);
     } else {
       this.currentPage = act.pageIndex + 1;
+      document.getElementById('leftlist').scrollTop = 0;
     }
     this.storeValueService.setQueryParams('page', this.currentPage);
   }
 
-  // 这也是从后端拿数据
+  // 从后端拿description
   getDescData(id) {
     this.contentservice.jobdescri(id).subscribe(
       (res) => {
@@ -69,10 +70,7 @@ export class JobsListingComponent implements OnInit {
     );
   }
 
-  /** 
-   * public Functions area * 
-  **/
-  // 这个只是左边list展示的Data
+  // 实时监听url的变化
   getAddressValue() {
     this.activatedRoute.queryParams.subscribe(
       (res) => {
@@ -99,8 +97,7 @@ export class JobsListingComponent implements OnInit {
     )
   }
 
-  // 从后端拿数据给前端展示
-  getListData(keyword, industry, location, type, page) {    
+  getListData(keyword, industry, location, type, page) {
     this.contentservice.searchKeyWord(keyword, industry, location, type, page).subscribe(
       (res) => {
         this.jobLists = res.data;
@@ -122,6 +119,8 @@ export class JobsListingComponent implements OnInit {
         this.itemData = data[i]
         this.getDescData(itemid)
         break;
+      } else if (i == 19 && itemid) {
+        this.storeValueService.setQueryParams('page', this.currentPage);
       }
     }
   }
@@ -134,5 +133,12 @@ export class JobsListingComponent implements OnInit {
     else {
       this.errorMessage = "Error! Can't catch Data."
     }
+  }
+
+  onScroll(event){
+    if( event.which == 2 ) {
+      event.preventDefault();
+      alert("middle button"); 
+   }
   }
 }

@@ -17,6 +17,7 @@ import { TestComponent } from './components/test/test.component';
 import { JobDetailComponent } from './components/jobs/job-detail/job-detail.component';
 
 import { SanitizehtmlPipe } from './pipes/sanitizehtml.pipe';
+import { DebounceclickDirective } from './directives/debounceclick.directive';
 
 
 @NgModule({
@@ -30,7 +31,8 @@ import { SanitizehtmlPipe } from './pipes/sanitizehtml.pipe';
     JobComponent,
     TestComponent,
     JobDetailComponent,
-    SanitizehtmlPipe
+    SanitizehtmlPipe,
+    DebounceclickDirective
   ],
   imports: [
     BrowserModule,

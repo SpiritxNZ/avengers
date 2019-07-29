@@ -8,7 +8,6 @@ import { StoreValueService } from '../../../services/storevalue/storevalue.servi
 })
 export class JobComponent implements OnInit {
   public action: any;
-  public errorMessage: any;
   public innerHeight: any;
   public listingHeight: any;
 
@@ -31,17 +30,8 @@ export class JobComponent implements OnInit {
     this.storeValueService.getItemsList.subscribe(
       (item) => {
         this.action = item;
+        document.getElementById('rightlist').scrollTop = 0;
       }
     );
-  }
-
-  backendErrorHandler(err) {
-    console.warn(err)
-    if (err.error.message != null) {
-      this.errorMessage = err.error.message;
-    }
-    else {
-      this.errorMessage = "Error! Can't catch Data."
-    }
   }
 }
