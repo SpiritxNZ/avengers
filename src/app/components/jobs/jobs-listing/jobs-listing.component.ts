@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 
 import { ContentService } from '../../../services/http/content.service';
 import { StoreValueService } from '../../../services/storevalue/storevalue.service';
+import { Debouncer } from '../../../classes/debouncer';
 
 @Component({
   selector: 'app-jobs-listing',
@@ -28,6 +29,9 @@ export class JobsListingComponent implements OnInit {
   public listingHeight: any
   public results: any;
   public onOff: boolean = false;
+  public debouncer: Debouncer;
+  public itemData: any;
+  public arr = [];
 
   public pagesIndex: any;
 
@@ -35,11 +39,11 @@ export class JobsListingComponent implements OnInit {
     private contentservice: ContentService,
     private storeValueService: StoreValueService,
     private activatedRoute: ActivatedRoute,
-    // public debouncer: Debouncer
+
   ) { }
 
   ngOnInit() {
-    this.showData();
+    this.getAddressValue();
     this.compoHeight();
   }
 
@@ -49,30 +53,34 @@ export class JobsListingComponent implements OnInit {
   }
 
   // clicking to sent infomation for job.component; refreshing page by url; paginating
-  showData(act?) {
-    if (act) {
-      if (act.id) {
-        this.storeValueService.itemsList.next(act);
-        this.storeValueService.setQueryParams('itemId', act.id);
-        this.storeValueService.setQueryParams('page', this.currentPage);
-        // this.debouncer.debounce()(() => {
-        //   this.storeValueService.itemsList.next(act);
-        // }, 1000)
-      } else {
-        this.getData(this.keyword, this.industry, this.location, this.type, act.pageIndex + 1);
-        document.getElementById("jobslist").scrollTop = 0;
-        this.storeValueService.setQueryParams('page', act.pageIndex + 1);
-      }
-      this.setParams(this.keyword, this.industry, this.location, this.type);
+  showData(act) {
+    if (act.id) {
+      this.storeValueService.setQueryParams('itemId', act.id);
+      this.itemData = act;
+      this.getDescData(act.id);
     } else {
-      this.getAddressValue();
+      this.currentPage = act.pageIndex + 1;
     }
+    this.storeValueService.setQueryParams('page', this.currentPage);
+  }
+
+  // 这也是从后端拿数据
+  getDescData(id) {
+    this.contentservice.jobdescri(id).subscribe(
+      (res) => {
+        this.itemData.description = res.job_description[0].description;
+        this.storeValueService.itemsList.next(this.itemData);
+      },
+      (err) => {
+        this.backendErrorHandler(err);
+      }
+    );
   }
 
   /** 
    * public Functions area * 
   **/
-  // get value from url
+  // 这个只是左边list展示的Data
   getAddressValue() {
     this.activatedRoute.queryParams.subscribe(
       (res) => {
@@ -94,20 +102,21 @@ export class JobsListingComponent implements OnInit {
         if (res.itemId) {
           this.itemId = res.itemId;
         }
-        this.getData(this.keyword, this.industry, this.location, this.type, this.currentPage);
+        this.getListData(this.keyword, this.industry, this.location, this.type, this.currentPage);
       }
     )
   }
 
-  getData(keyword, industry, location, type, page) {
+  // 从后端拿数据给前端展示
+  getListData(keyword, industry, location, type, page) {
     this.contentservice.searchKeyWord(keyword, industry, location, type, page).subscribe(
       (res) => {
-        if (JSON.stringify(res.data) !== "[]") {
-          this.getRes(res)
-          this.storeValueService.clickedItem.next(res.data);
-        } else {
-          this.errorMessage = "Error! Can't catch Data.";
-        }
+        this.jobLists = res.data; //这是全部的list
+        this.lengthTotal = res.total;
+        this.currentPage = res.current_page;
+        this.pagesIndex = res.current_page - 1;
+        this.processing(this.jobLists, this.itemId);
+        delete this.errorMessage;
       },
       (err) => {
         this.backendErrorHandler(err);
@@ -115,19 +124,14 @@ export class JobsListingComponent implements OnInit {
     )
   }
 
-  getRes(res) {
-    this.jobLists = res.data;
-    this.lengthTotal = res.total;
-    this.currentPage = res.current_page;
-    this.pagesIndex = res.current_page - 1;
-    delete this.errorMessage;
-  }
-
-  setParams(keyword, industry, location, type) {
-    this.storeValueService.setQueryParams('searchString', keyword);
-    this.storeValueService.setQueryParams('disciplineNum', industry);
-    this.storeValueService.setQueryParams('locationNum', location);
-    this.storeValueService.setQueryParams('typeNum', type);
+  processing(data, itemid) {
+    for (var i = 0; i < data['length']; i++) {
+      if (data[i].id == itemid) {
+        this.itemData = data[i]
+        this.getDescData(itemid)
+        break;
+      }
+    }
   }
 
   backendErrorHandler(err) {

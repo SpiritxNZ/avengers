@@ -13,11 +13,10 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class JobComponent implements OnInit {
   public action: any;
-  public descri: any;
   public errorMessage: any;
   public innerHeight: any;
   public listingHeight: any;
-  public itemId: any;  
+  public itemId: any;
   public arr = [];
   private subscription: Subscription;
 
@@ -30,9 +29,10 @@ export class JobComponent implements OnInit {
 
   ngOnInit() {
     this.compoHeight();
-    this.refreshPage();
+    // this.refreshPage();    
+    this.getJobItem();
   }
-  
+
   // ngOnDestroy() {
   //   this.subscription.unsubscribe();
   // }
@@ -41,76 +41,15 @@ export class JobComponent implements OnInit {
     this.innerHeight = window.innerHeight;
     this.listingHeight = this.innerHeight - 130
   }
-
-  // refreshing the page or a item from jobs-list.component clicking
-  refreshPage() {
-    this.activatedRoute.queryParams.subscribe(
-      (res) => {
-        if (res.itemId) {
-          // console.log(res.itemId)
-          // For refreshing
-          this.getJobItems(res.itemId)
-        } else {
-          // For from clicking
-          this.getJobItem();
-        }
-      }
-    )
-  }
-
+  
   // get a item from jobs-list.component clicking
   getJobItem() {
     this.storeValueService.getItemsList.subscribe(
       (item) => {
-        // console.log(item)
+        console.log(item)
         this.action = item;
-        this.getItemDescri(item['id']);
       }
     );
-  }
-
-  // refreshing page: if there is id in URL, match an united item of the id from sent items list.
-  getJobItems(itemid) {
-    this.storeValueService.getClickedItem.subscribe(
-      (items) => {
-        console.log(items)
-        for (var i = 0; i < items['length']; i++) {
-          this.arr[i] = items[i].id
-          let setOfWords = new Set(this.arr);
-          if (setOfWords.has(parseInt(itemid)) && items[i].id == itemid) {
-            this.action = items[i];
-            this.getItemDescri(items[i].id);
-            break;
-          } else if (!setOfWords.has(parseInt(itemid))) {
-            delete this.descri;
-            delete this.action;
-            // this.router.navigate([],{
-            //   queryParams: {
-            //     itemId: null
-            //   },
-            //   queryParamsHandling: 'merge'
-            // })
-          }
-        }
-        // this.router.navigate(this.router.url, { queryParams: {}})  
-        // console.log(this.activatedRoute.snapshot.queryParams)
-        delete this.errorMessage;
-      }
-    )
-  }
-
-  // find descriptioin of the id out from api
-  getItemDescri(id) {
-    this.contentservice.jobdescri(id).subscribe(
-      (res) => {
-        this.descri = res.job_description[0].description;
-        // when everytime refreshing this component, go to top
-        document.getElementById("jobcontent").scrollTop = 0;
-      },
-      (err) => {
-        this.backendErrorHandler(err);
-      }
-    )
   }
 
   backendErrorHandler(err) {

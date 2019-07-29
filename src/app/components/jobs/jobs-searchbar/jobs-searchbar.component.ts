@@ -13,18 +13,16 @@ export class JobsSearchbarComponent implements OnInit {
   public jobDis: any;
   public jobLoc: any;
   public jobType: any;
-  public searchRes: any;
   public keyword = "";
   public industryId = "";
   public locationId = "";
   public typeId = "";
-  public queryParams: object = {};
   public errorMessage: any;
 
   constructor(
     private contentService: ContentService,
     private storeValueService: StoreValueService,
-    private activatedRoute: ActivatedRoute
+    private activatedRoute: ActivatedRoute,
   ) { }
 
   ngOnInit() {
@@ -50,16 +48,16 @@ export class JobsSearchbarComponent implements OnInit {
     )
   }
 
-  // get searching results by limited conditions 
+  // push searching results to url 
   onSearch() {
     this.storeValueService.setQueryParams('searchString', this.keyword);
     this.storeValueService.setQueryParams('disciplineNum', this.industryId);
     this.storeValueService.setQueryParams('locationNum', this.locationId);
-    this.storeValueService.setQueryParams('typeNum', this.typeId);        
+    this.storeValueService.setQueryParams('typeNum', this.typeId);
     this.storeValueService.setQueryParams('page', 1);
   }
 
-  // For Two-way data binding
+  // For Two-way data binding, the selected item in dropdown is invariable.
   refreshPageControl() {
     this.activatedRoute.queryParams.subscribe(
       (res) => {

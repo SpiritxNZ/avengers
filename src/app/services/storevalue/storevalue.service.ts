@@ -10,11 +10,11 @@ export class StoreValueService {
   public errorMessage: any;
 
   // sent a items list to job.component
-  public itemsList = new BehaviorSubject('');
+  public itemsList = new Subject;
   public getItemsList = this.itemsList.asObservable();
 
   // sent a item to job.component.
-  public clickedItem = new BehaviorSubject<any>('');
+  public clickedItem = new Subject;
   public getClickedItem = this.clickedItem.asObservable();
 
   constructor(
