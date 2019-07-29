@@ -16,7 +16,6 @@ import { Debouncer } from '../../../classes/debouncer';
 })
 export class JobsListingComponent implements OnInit {
   public jobLists: any;
-  public resultsLength = 0;
   public lengthTotal: any;
   public keyword = '';
   public industry = '';
@@ -27,12 +26,7 @@ export class JobsListingComponent implements OnInit {
   public errorMessage: any;
   public innerHeight: any
   public listingHeight: any
-  public results: any;
-  public onOff: boolean = false;
-  public debouncer: Debouncer;
   public itemData: any;
-  public arr = [];
-
   public pagesIndex: any;
 
   constructor(
@@ -56,8 +50,6 @@ export class JobsListingComponent implements OnInit {
   showData(act) {
     if (act.id) {
       this.storeValueService.setQueryParams('itemId', act.id);
-      this.itemData = act;
-      this.getDescData(act.id);
     } else {
       this.currentPage = act.pageIndex + 1;
     }
@@ -108,10 +100,10 @@ export class JobsListingComponent implements OnInit {
   }
 
   // 从后端拿数据给前端展示
-  getListData(keyword, industry, location, type, page) {
+  getListData(keyword, industry, location, type, page) {    
     this.contentservice.searchKeyWord(keyword, industry, location, type, page).subscribe(
       (res) => {
-        this.jobLists = res.data; //这是全部的list
+        this.jobLists = res.data;
         this.lengthTotal = res.total;
         this.currentPage = res.current_page;
         this.pagesIndex = res.current_page - 1;
