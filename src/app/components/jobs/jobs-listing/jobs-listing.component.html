@@ -22,7 +22,7 @@
           <div class="job-item">
             <div class="company-content">
               <div class="company-content-brief">
-                <div class="clicktittle" (click)="showData(i)">
+                <div class="clicktittle" (click)="showData(i)" (mouseup)="onScroll($event,i.id)">
                   <h3 style="color: blue"><b>{{i.title}}</b></h3>
                 </div>
                 <h4 *ngIf="i.principal != ''"><b>{{i.principal}}</b></h4>

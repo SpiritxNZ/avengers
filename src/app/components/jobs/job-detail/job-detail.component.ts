@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ContentService } from 'src/app/services/http/content.service';
+import { StoreValueService } from 'src/app/services/storevalue/storevalue.service';
 
 @Component({
   selector: 'app-job-detail',
@@ -12,11 +13,15 @@ export class JobDetailComponent implements OnInit {
   public innerHeight: any;
   public listingHeight: any;
 
-  constructor(private contentservice: ContentService) { }
+  constructor(
+    private contentservice: ContentService,
+    private storeValueService: StoreValueService
+  ) { }
 
   ngOnInit() {
     this.compoHeight();   
-    this.getDescData();
+    // this.getDescData();
+    this.getJobItem();
   }
 
   compoHeight() {
@@ -30,6 +35,15 @@ export class JobDetailComponent implements OnInit {
         this.description = res.job_description[0].description;
       }
     )
+  }
+
+  // get a item from jobs-list.component clicking
+  getJobItem() {
+    this.storeValueService.getItemsList.subscribe(
+      (item) => {
+        console.log(item)
+      }
+    );
   }
 
 }

@@ -1,6 +1,7 @@
 import { Component, OnInit, Directive } from '@angular/core';
-import { ActivatedRoute, ActivatedRouteSnapshot } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
+import { JobDetailComponent } from '../job-detail/job-detail.component';
 import { ContentService } from '../../../services/http/content.service';
 import { StoreValueService } from '../../../services/storevalue/storevalue.service';
 
@@ -32,7 +33,7 @@ export class JobsListingComponent implements OnInit {
     private contentservice: ContentService,
     private storeValueService: StoreValueService,
     private activatedRoute: ActivatedRoute,
-    // private router: ActivatedRouteSnapshot
+    private router: Router
 
   ) { }
 
@@ -125,6 +126,12 @@ export class JobsListingComponent implements OnInit {
     }
   }
 
+  onScroll(event, id) {
+    if (event.button == 1) {
+      window.open('/jobdetail?itemId=' + id, "_blank")
+    }
+  }
+
   backendErrorHandler(err) {
     console.warn(err)
     if (err.error.message != null) {
@@ -132,12 +139,6 @@ export class JobsListingComponent implements OnInit {
     }
     else {
       this.errorMessage = "Error! Can't catch Data."
-    }
-  }
-
-  onScroll(event) {
-    if(event.button == 1) {
-      console.log(event)
     }
   }
 }
