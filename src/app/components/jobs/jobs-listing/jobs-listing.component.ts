@@ -135,10 +135,9 @@ export class JobsListingComponent implements OnInit {
     }
   }
 
-  onScroll(event){
-    if( event.which == 2 ) {
-      event.preventDefault();
-      alert("middle button"); 
-   }
+  onScroll(event) {
+    if(event.button == 1) {
+      console.log(event)
+    }
   }
 }

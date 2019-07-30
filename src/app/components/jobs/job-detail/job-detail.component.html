@@ -1,3 +1,16 @@
 <div class="container">
-    <div style="background: green; height: 900px; width: 100%"></div>
+  <mat-card class="content crad" [ngStyle]="{'height.px': listingHeight}" style="overflow-y: auto" >
+    <mat-card-header>
+      <mat-card-title>Senior Technical Writer</mat-card-title>
+      <mat-card-subtitle>
+          <div>North Shore $50,000 - $80,000</div>
+          <div>Full time · Aderant</div>
+      </mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content class="card-content">
+      <div [innerHTML]="description | sanitizehtml" style="padding:3rem;">
+          
+      </div>
+    </mat-card-content>
+  </mat-card>
 </div>
