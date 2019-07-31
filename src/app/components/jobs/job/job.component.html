@@ -11,7 +11,7 @@
               <div class="content-container">
                 <h1 *ngIf="action">{{action.title}}</h1>
                 <div class="company-info">
-                  <span *ngIf="action">{{action.location_name}}</span>
+                  <span *ngIf="action">{{action.location_name}}</span>&nbsp;
                   <span *ngIf="action" style="float: right;">
                     <span *ngIf="action.rate_low">{{action.rate_low | currency:'CAD':'symbol-narrow':'0.0'}}</span>
                     <span *ngIf="action.rate_low && action.rate_high"> - </span>

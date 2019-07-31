@@ -24,4 +24,9 @@ export class ContentService {
   jobdescri(id){
     return this.http.get<any>(this.baseUrl + "/jobdetail?id=" + id);
   }
+
+  //get item by ID
+  getItemDetail(id){
+    return this.http.get<any>(this.baseUrl + "/findjobs/" + id)
+  }
 }

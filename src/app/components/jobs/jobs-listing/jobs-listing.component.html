@@ -22,7 +22,7 @@
           <div class="job-item">
             <div class="company-content">
               <div class="company-content-brief">
-                <div class="clicktittle" (click)="showData(i)" (mouseup)="onScroll($event,i.id)">
+                <div class="clicktittle" (mouseup)="onMiddleClick($event,i.id)">
                   <h3 style="color: blue"><b>{{i.title}}</b></h3>
                 </div>
                 <h4 *ngIf="i.principal != ''"><b>{{i.principal}}</b></h4>
@@ -31,7 +31,8 @@
             </div>
           </div>
         </li>
-        <mat-paginator (page)="showData($event)" [length]="lengthTotal" [pageSize]="20" [pageIndex]="pagesIndex"></mat-paginator>
+        <mat-paginator (page)="showData($event)" [length]="lengthTotal" [pageSize]="20" [pageIndex]="pagesIndex">
+        </mat-paginator>
       </ul>
     </div>
   </div>

@@ -1,9 +1,10 @@
 import { Component, OnInit, Directive } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 
 import { JobDetailComponent } from '../job-detail/job-detail.component';
 import { ContentService } from '../../../services/http/content.service';
 import { StoreValueService } from '../../../services/storevalue/storevalue.service';
+import { identifierModuleUrl } from '@angular/compiler';
 
 @Component({
   selector: 'app-jobs-listing',
@@ -33,7 +34,6 @@ export class JobsListingComponent implements OnInit {
     private contentservice: ContentService,
     private storeValueService: StoreValueService,
     private activatedRoute: ActivatedRoute,
-    private router: Router
 
   ) { }
 
@@ -56,19 +56,6 @@ export class JobsListingComponent implements OnInit {
       document.getElementById('leftlist').scrollTop = 0;
     }
     this.storeValueService.setQueryParams('page', this.currentPage);
-  }
-
-  // 从后端拿description
-  getDescData(id) {
-    this.contentservice.jobdescri(id).subscribe(
-      (res) => {
-        this.itemData.description = res.job_description[0].description;
-        this.storeValueService.itemsList.next(this.itemData);
-      },
-      (err) => {
-        this.backendErrorHandler(err);
-      }
-    );
   }
 
   // 实时监听url的变化
@@ -117,8 +104,7 @@ export class JobsListingComponent implements OnInit {
   processing(data, itemid) {
     for (var i = 0; i < data['length']; i++) {
       if (data[i].id == itemid) {
-        this.itemData = data[i]
-        this.getDescData(itemid)
+        this.getDescData(data[i], itemid)
         break;
       } else if (i == 19 && itemid) {
         this.storeValueService.setQueryParams('page', this.currentPage);
@@ -126,9 +112,22 @@ export class JobsListingComponent implements OnInit {
     }
   }
 
-  onScroll(event, id) {
-    if (event.button == 1) {
-      window.open('/jobdetail?itemId=' + id, "_blank")
+  // get description from serve by id 
+  getDescData(data, id) {
+    this.contentservice.jobdescri(id).subscribe(
+      (res) => {
+        data.description = res.job_description[0].description;
+        this.storeValueService.itemsList.next(data);
+      },
+      (err) => {
+        this.backendErrorHandler(err);
+      }
+    );
+  }
+
+  onMiddleClick(event, id){
+    if(event.button == 1) {
+      window.open('/jobdetail?itemId=' + id, '_blank');
     }
   }
 

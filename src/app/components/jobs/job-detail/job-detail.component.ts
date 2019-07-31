@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ContentService } from 'src/app/services/http/content.service';
 import { StoreValueService } from 'src/app/services/storevalue/storevalue.service';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-job-detail',
@@ -12,15 +13,15 @@ export class JobDetailComponent implements OnInit {
   public description: any;
   public innerHeight: any;
   public listingHeight: any;
+  public jobDetails: any;
 
   constructor(
     private contentservice: ContentService,
-    private storeValueService: StoreValueService
+    private activatedRoute: ActivatedRoute
   ) { }
 
   ngOnInit() {
-    this.compoHeight();   
-    // this.getDescData();
+    this.compoHeight();
     this.getJobItem();
   }
 
@@ -29,21 +30,22 @@ export class JobDetailComponent implements OnInit {
     this.listingHeight = this.innerHeight - 130
   }
 
-  getDescData(){
-    this.contentservice.jobdescri(918).subscribe(
+  // get a item from jobs-list.component clicking
+  getJobItem() {
+    let id = this.activatedRoute.snapshot['_routerState'].url.substring(18);
+    this.contentservice.getItemDetail(id).subscribe(
       (res) => {
-        this.description = res.job_description[0].description;
+        this.getJobDescri(res.job[0], id);
       }
     )
   }
 
-  // get a item from jobs-list.component clicking
-  getJobItem() {
-    this.storeValueService.getItemsList.subscribe(
-      (item) => {
-        console.log(item)
+  getJobDescri(data, id) {
+    this.contentservice.jobdescri(id).subscribe(
+      (act) => {
+        data.description = act.job_description[0].description;
+        this.jobDetails = data;
       }
-    );
+    )
   }
-
 }
