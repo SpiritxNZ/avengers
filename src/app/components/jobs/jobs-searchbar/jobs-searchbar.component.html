@@ -4,20 +4,20 @@
       <input matInput placeholder="Search by keywords" [(ngModel)]="keyword">
     </mat-form-field>
     <mat-form-field class="col-2">
-      <mat-label>Industries</mat-label>
-      <mat-select [(ngModel)]="industryId">
+      <mat-label>Any Classification</mat-label>
+      <mat-select [(ngModel)]="industryId" multiple>
         <mat-option *ngFor="let i of jobDis" value="{{i.discipline_num}}">{{i.discipline_name}}</mat-option>
       </mat-select>
     </mat-form-field>
     <mat-form-field class="col-2">
       <mat-label>Location</mat-label>
-      <mat-select [(ngModel)]="locationId">
+      <mat-select [(ngModel)]="locationId" multiple>
         <mat-option *ngFor="let i of jobLoc" value="{{i.location_num}}">{{i.location_name}}</mat-option>
       </mat-select>
     </mat-form-field>
     <mat-form-field class="col-2">
-      <mat-label>Type</mat-label>
-      <mat-select [(ngModel)]="typeId">
+      <mat-label>All Work Types</mat-label>
+      <mat-select [(ngModel)]="typeId" multiple>
         <mat-option *ngFor="let i of jobType" value="{{i.type_num}}">{{i.type_name}}</mat-option>
       </mat-select>
     </mat-form-field>
