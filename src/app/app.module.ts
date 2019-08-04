@@ -13,7 +13,6 @@ import { JobsListingComponent } from './components/jobs/jobs-listing/jobs-listin
 import { NavbarComponent } from './components/general/navbar/navbar.component';
 import { FooterComponent } from './components/general/footer/footer.component';
 import { JobComponent } from './components/jobs/job/job.component';
-import { TestComponent } from './components/test/test.component';
 import { JobDetailComponent } from './components/jobs/job-detail/job-detail.component';
 
 import { SanitizehtmlPipe } from './pipes/sanitizehtml.pipe';
@@ -29,7 +28,6 @@ import { DebounceclickDirective } from './directives/debounceclick.directive';
     NavbarComponent,
     FooterComponent,
     JobComponent,
-    TestComponent,
     JobDetailComponent,
     SanitizehtmlPipe,
     DebounceclickDirective
