@@ -39,7 +39,8 @@ export class JobDetailComponent implements OnInit {
       }
     )
   }
-
+  
+  // get the detail of a item by id
   getJobDescri(data, id) {
     this.contentservice.jobdescri(id).subscribe(
       (act) => {

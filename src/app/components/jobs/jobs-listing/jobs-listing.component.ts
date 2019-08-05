@@ -47,7 +47,7 @@ export class JobsListingComponent implements OnInit {
     this.listingHeight = this.innerHeight - 185
   }
 
-  // 把itemid和页数传到地址栏
+  // sent itemid and page number to Url
   showData(act) {
     if (act.id) {
       this.storeValueService.setQueryParams('itemId', act.id);
@@ -58,7 +58,7 @@ export class JobsListingComponent implements OnInit {
     this.storeValueService.setQueryParams('page', this.currentPage);
   }
 
-  // 实时监听url的变化
+  // listen the changeof Url in real time
   getAddressValue() {
     this.activatedRoute.queryParams.subscribe(
       (res) => {
@@ -125,6 +125,7 @@ export class JobsListingComponent implements OnInit {
     );
   }
 
+  //the function of the middle click
   onMiddleClick(event, id){
     if(event.button == 1) {
       window.open('/jobdetail?itemId=' + id, '_blank');
