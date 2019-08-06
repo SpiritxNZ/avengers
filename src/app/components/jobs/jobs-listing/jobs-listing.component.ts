@@ -143,7 +143,11 @@ export class JobsListingComponent implements OnInit {
   backendErrorHandler(err) {
     console.warn(err)
     if (err.error.message != null) {
+      if(err.status != 500) {
       this.errorMessage = err.error.message;
+      } else {
+        this.errorMessage = "Fail to find content out from Server!"
+      }
     }
     else {
       this.errorMessage = "Error! Can't catch Data."
