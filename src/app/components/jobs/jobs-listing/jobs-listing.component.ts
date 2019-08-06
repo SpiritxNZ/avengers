@@ -65,6 +65,8 @@ export class JobsListingComponent implements OnInit {
       (res) => {
         if (res.searchString) {
           this.keyword = res.searchString;
+        } else if (res.searchString == undefined) {
+          this.keyword = "";
         }
         if (res.disciplineNum) {
           this.industry = res.disciplineNum;
@@ -83,8 +85,9 @@ export class JobsListingComponent implements OnInit {
         }
         if(res.order_by){
           this.sortBy = res.order_by;
+        } else if (res.order_by == undefined) {
+          this.sortBy = "";
         }
-        console.log(res)
         this.getListData(this.keyword, this.industry, this.location, this.type, this.currentPage, this.sortBy);
       }
     )

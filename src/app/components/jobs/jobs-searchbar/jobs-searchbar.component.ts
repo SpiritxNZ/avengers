@@ -75,6 +75,9 @@ export class JobsSearchbarComponent implements OnInit {
         if (res.typeNum) {
           this.typeId = res.typeNum;
         }
+        if(res.order_by) {
+          this.sortId = res.order_by
+        }
       }
     )
   }
