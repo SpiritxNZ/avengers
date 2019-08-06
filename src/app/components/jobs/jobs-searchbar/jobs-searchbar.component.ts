@@ -17,6 +17,7 @@ export class JobsSearchbarComponent implements OnInit {
   public industryId = "";
   public locationId = "";
   public typeId = "";
+  public sortId = "";
   public errorMessage: any;
 
   constructor(
@@ -55,6 +56,7 @@ export class JobsSearchbarComponent implements OnInit {
     this.storeValueService.setQueryParams('locationNum', this.locationId);
     this.storeValueService.setQueryParams('typeNum', this.typeId);
     this.storeValueService.setQueryParams('page', 1);
+    this.storeValueService.setQueryParams('order_by', this.sortId);
   }
 
   // For Two-way data binding, the selected item in dropdown is invariable.

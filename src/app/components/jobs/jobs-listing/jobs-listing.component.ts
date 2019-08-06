@@ -22,6 +22,7 @@ export class JobsListingComponent implements OnInit {
   public industry = '';
   public location = '';
   public type = '';
+  public sortBy = '';
   public currentPage = 1;
   public itemId: any;
   public errorMessage: any;
@@ -80,13 +81,17 @@ export class JobsListingComponent implements OnInit {
         if (res.itemId) {
           this.itemId = res.itemId;
         }
-        this.getListData(this.keyword, this.industry, this.location, this.type, this.currentPage);
+        if(res.order_by){
+          this.sortBy = res.order_by;
+        }
+        console.log(res)
+        this.getListData(this.keyword, this.industry, this.location, this.type, this.currentPage, this.sortBy);
       }
     )
   }
 
-  getListData(keyword, industry, location, type, page) {
-    this.contentservice.searchKeyWord(keyword, industry, location, type, page).subscribe(
+  getListData(keyword, industry, location, type, page, orderby) {
+    this.contentservice.searchKeyWord(keyword, industry, location, type, page, orderby).subscribe(
       (res) => {
         this.jobLists = res.data;
         this.lengthTotal = res.total;

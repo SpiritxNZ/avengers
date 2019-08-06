@@ -16,8 +16,8 @@ export class ContentService {
   }
 
   // get filtering data
-  searchKeyWord(keyword, jobdiscipline, joblocation, jobtype, pageSize) {
-    return this.http.get<any>(this.baseUrl + "/findjobs?" + "key_word=" + keyword + "&job_discipline=" + jobdiscipline + "&job_location=" + joblocation + "&job_type=" + jobtype + "&page=" + pageSize)
+  searchKeyWord(keyword, jobdiscipline, joblocation, jobtype, pageSize, orderBy) {
+    return this.http.get<any>(this.baseUrl + "/findjobs?" + "key_word=" + keyword + "&job_discipline=" + jobdiscipline + "&job_location=" + joblocation + "&job_type=" + jobtype + "&page=" + pageSize + "&order_by=" + orderBy)
   }
 
   // get description from an item of data 
