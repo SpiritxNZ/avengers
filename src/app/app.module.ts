@@ -22,13 +22,13 @@ import { DebounceclickDirective } from './directives/debounceclick.directive';
 @NgModule({
   declarations: [
     AppComponent,
-    JobsPanelComponent,
-    JobsSearchbarComponent,
-    JobsListingComponent,
     NavbarComponent,
     FooterComponent,
     JobComponent,
     JobDetailComponent,
+    JobsPanelComponent,
+    JobsSearchbarComponent,
+    JobsListingComponent,
     SanitizehtmlPipe,
     DebounceclickDirective
   ],
